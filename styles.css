@@ -1,0 +1,157 @@
+/* Estilos base */
+body { 
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+    background-color: #f3f4f6; 
+    -webkit-tap-highlight-color: transparent; 
+}
+
+/* Borde verde con opacidad igual al botón cerrado */
+.bag-locked-border {
+    box-shadow: 0 0 0 2px rgba(34,197,94,0.6); /* verde-500 con opacidad 0.6 */
+}
+
+.tab-active { 
+    color: #2563eb; 
+    border-bottom: 2px solid #2563eb; 
+}
+
+.tab-inactive { 
+    color: #6b7280; 
+}
+
+.progress-transition { 
+    transition: width 0.5s ease-in-out; 
+}
+
+/* Highlight effect for new items */
+.item-highlight {
+    animation: highlightFade 2s ease-out forwards;
+}
+
+/* Highlight for newly assigned items */
+.newly-assigned-item {
+    animation: newItemPulse 1.5s ease-out forwards;
+}
+
+@keyframes newItemPulse {
+    0% { background-color: #22c55e; box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.4); }
+    50% { background-color: #86efac; }
+    100% { background-color: transparent; box-shadow: none; }
+}
+
+@keyframes highlightFade {
+    0% { box-shadow: 0 0 0 3px #3b82f6; background-color: #eff6ff; }
+    50% { box-shadow: 0 0 0 3px #3b82f6; background-color: #eff6ff; }
+    100% { box-shadow: 0 0 0 0px transparent; background-color: transparent; }
+}
+
+/* Animación de barrido para eliminar item */
+.item-swipe-out {
+    animation: swipeOut 0.3s ease-out forwards;
+}
+
+@keyframes swipeOut {
+    0% { transform: translateX(0); opacity: 1; }
+    100% { transform: translateX(100%); opacity: 0; }
+}
+
+/* Safe Area Spacing */
+.pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+.pt-safe { padding-top: env(safe-area-inset-top); }
+
+/* Mobile Optimizations */
+input, select, button { font-size: 16px !important; } /* Prevent zoom on focus */
+
+/* Grid base para móvil */
+.desktop-grid, .desktop-grid-3 { display: flex; flex-direction: column; gap: 1rem; }
+
+/* Optimización para Desktop */
+@media (min-width: 768px) {
+    .desktop-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .desktop-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .bag-card { height: 100%; display: flex; flex-direction: column; }
+    .bag-card details { flex: 1; }
+    .bag-card ul { max-height: 400px; overflow-y: auto; }
+}
+
+@media (min-width: 1024px) {
+    .family-grid { display: flex; flex-wrap: wrap; gap: 3rem; align-items: flex-start; }
+    .family-column { flex: 0 0 auto; }
+    .family-bags { display: flex; flex-wrap: wrap; gap: 1rem; align-items: stretch; }
+    .family-bags > div { width: 280px; flex-shrink: 0; min-height: 400px; display: flex; flex-direction: column; }
+    .family-bags > div details { flex: 1; }
+    .bag-title-area { min-height: 3.5rem; } /* Espacio para 2 líneas de título */
+}
+
+@media (min-width: 1200px) {
+    .desktop-grid { grid-template-columns: repeat(3, 1fr); }
+    .desktop-grid-3 { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (min-width: 1600px) {
+    .desktop-grid { grid-template-columns: repeat(5, 1fr); }
+}
+
+/* Sidebar styles */
+.sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebar-overlay {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.sidebar-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.header-search {
+    top: -100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: top 0.2s ease-out, opacity 0.2s ease-out;
+    padding-top: env(safe-area-inset-top, 0px);
+}
+
+.header-search.open {
+    top: 0;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Sticky bag header con sombra */
+@media (max-width: 767px) {
+    .bag-card {
+        overflow: visible;
+    }
+    .bag-card > .sticky {
+        box-shadow: 0 2px 4px -1px rgba(0,0,0,0.1);
+        z-index: 15;
+    }
+}
+
+/* Asegurar que el dropdown de búsqueda esté por encima del sticky */
+#searchDropdown {
+    z-index: 45;
+}
+
+/* Animación de puntos de carga */
+.loading-dots::after {
+    content: '';
+    animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+    0%, 20% { content: ''; }
+    40% { content: '.'; }
+    60% { content: '..'; }
+    80%, 100% { content: '...'; }
+}

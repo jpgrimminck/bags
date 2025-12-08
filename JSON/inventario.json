@@ -1,0 +1,1283 @@
+[
+    {
+        "id": 1,
+        "name": "Otros zapatos",
+        "owner": 3,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 2,
+        "name": "Botella",
+        "owner": 3,
+        "loc": "Cocina",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 3,
+        "name": "Babero",
+        "owner": 3,
+        "loc": "Cocina",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 4,
+        "name": "Colonia",
+        "owner": 3,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 5,
+        "name": "Impermeable",
+        "owner": 3,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "abrigo"
+    },
+    {
+        "id": 6,
+        "name": "Tenidas (3)",
+        "owner": 3,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 7,
+        "name": "Pijamas",
+        "owner": 3,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 8,
+        "name": "Calcetines",
+        "owner": 3,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 9,
+        "name": "Zapatos",
+        "owner": 3,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 10,
+        "name": "Chalitas",
+        "owner": 3,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 11,
+        "name": "Tutos",
+        "owner": 3,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 12,
+        "name": "Chalecos",
+        "owner": 3,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "abrigo"
+    },
+    {
+        "id": 13,
+        "name": "Cortavientos",
+        "owner": 3,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "abrigo"
+    },
+    {
+        "id": 14,
+        "name": "Gorrito sol",
+        "owner": 3,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "abrigo"
+    },
+    {
+        "id": 15,
+        "name": "Gorrito frío",
+        "owner": 3,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "abrigo"
+    },
+    {
+        "id": 16,
+        "name": "Abrigo",
+        "owner": 3,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "abrigo"
+    },
+    {
+        "id": 17,
+        "name": "Pantuflas",
+        "owner": 3,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 18,
+        "name": "Gorro sol",
+        "owner": 4,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "abrigo"
+    },
+    {
+        "id": 19,
+        "name": "Pañales",
+        "owner": 4,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 20,
+        "name": "Pañal agua",
+        "owner": 4,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 21,
+        "name": "Traje baño",
+        "owner": 4,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 22,
+        "name": "Ropa",
+        "owner": 4,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 23,
+        "name": "Gorros",
+        "owner": 4,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "abrigo"
+    },
+    {
+        "id": 24,
+        "name": "Abrigo",
+        "owner": 4,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "abrigo"
+    },
+    {
+        "id": 25,
+        "name": "Pijama",
+        "owner": 4,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 26,
+        "name": "Bloqueador",
+        "owner": 4,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 27,
+        "name": "Escobilla",
+        "owner": 4,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 28,
+        "name": "Jabón",
+        "owner": 4,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 29,
+        "name": "Hipoglos",
+        "owner": 4,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 30,
+        "name": "Toallitas bebé",
+        "owner": 4,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 31,
+        "name": "Vitaminas",
+        "owner": 4,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 32,
+        "name": "Paracetamol infantil",
+        "owner": 4,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 33,
+        "name": "Termómetro",
+        "owner": 4,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "electronica"
+    },
+    {
+        "id": 34,
+        "name": "Tijeritas bebé",
+        "owner": 4,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 35,
+        "name": "Saca mocos",
+        "owner": 4,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 36,
+        "name": "Chupete",
+        "owner": 4,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 37,
+        "name": "Mamaderas",
+        "owner": 4,
+        "loc": "Cocina",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 38,
+        "name": "Colados",
+        "owner": 4,
+        "loc": "Cocina",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 39,
+        "name": "Galletas arroz",
+        "owner": 4,
+        "loc": "Cocina",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 40,
+        "name": "Luz nocturna",
+        "owner": 4,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "electronica"
+    },
+    {
+        "id": 41,
+        "name": "Ruido blanco",
+        "owner": 4,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "electronica"
+    },
+    {
+        "id": 42,
+        "name": "Gimnasio",
+        "owner": 4,
+        "loc": "Living/Estar",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 43,
+        "name": "Pianito",
+        "owner": 4,
+        "loc": "Living/Estar",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 44,
+        "name": "Mochilita",
+        "owner": 4,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 45,
+        "name": "Toalla playa",
+        "owner": 4,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 46,
+        "name": "Balde playa",
+        "owner": 4,
+        "loc": "Living/Estar",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 47,
+        "name": "Tenidas (3)",
+        "owner": 4,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 48,
+        "name": "Calcetines",
+        "owner": 4,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 49,
+        "name": "Chalitas",
+        "owner": 4,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 50,
+        "name": "Tutos",
+        "owner": 4,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 51,
+        "name": "Chalecos",
+        "owner": 4,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "abrigo"
+    },
+    {
+        "id": 52,
+        "name": "Cortavientos",
+        "owner": 4,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "abrigo"
+    },
+    {
+        "id": 53,
+        "name": "Gorrito frío",
+        "owner": 4,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "abrigo"
+    },
+    {
+        "id": 54,
+        "name": "Pantuflas",
+        "owner": 4,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 55,
+        "name": "Paracetamol adultos",
+        "owner": 2,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 56,
+        "name": "Crema Eucerin",
+        "owner": 2,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 57,
+        "name": "Remedios (5)",
+        "owner": 2,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 58,
+        "name": "Placa",
+        "owner": 2,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 59,
+        "name": "Sertac",
+        "owner": 2,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 60,
+        "name": "Gotitas",
+        "description": "Para los ojos, envase azul",
+        "owner": 2,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 61,
+        "name": "Lubricante",
+        "description": "Lubricante íntimo",
+        "owner": 2,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 62,
+        "name": "Bloqueador sol",
+        "description": "FPS 50+, resistente al agua",
+        "owner": 2,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 63,
+        "name": "Crema estrías",
+        "owner": 2,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 64,
+        "name": "Jeans maternales",
+        "owner": 2,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 65,
+        "name": "Traje baño",
+        "owner": 2,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 66,
+        "name": "Ropa interior",
+        "owner": 2,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 67,
+        "name": "Chalas",
+        "owner": 2,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 68,
+        "name": "Zapatillas",
+        "owner": 2,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 69,
+        "name": "Poleras",
+        "owner": 2,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 70,
+        "name": "Short",
+        "owner": 2,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 71,
+        "name": "Calcetines",
+        "owner": 2,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 72,
+        "name": "Pantalones",
+        "owner": 2,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 73,
+        "name": "Chaleco",
+        "owner": 2,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "abrigo"
+    },
+    {
+        "id": 74,
+        "name": "Abrigo",
+        "owner": 2,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "abrigo"
+    },
+    {
+        "id": 75,
+        "name": "Pijama",
+        "owner": 2,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 76,
+        "name": "Neceser",
+        "owner": 2,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 77,
+        "name": "Jockey",
+        "owner": 2,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "abrigo"
+    },
+    {
+        "id": 78,
+        "name": "Anteojos sol",
+        "owner": 2,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 79,
+        "name": "Ropa deporte",
+        "owner": 2,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 80,
+        "name": "Perfume mío",
+        "owner": 2,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 81,
+        "name": "Shampoo y bálsamo",
+        "owner": 2,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 82,
+        "name": "Secador pelo",
+        "owner": 2,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "electronica"
+    },
+    {
+        "id": 83,
+        "name": "Mascarilla",
+        "owner": 2,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 84,
+        "name": "Ropa cambio",
+        "owner": 2,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 85,
+        "name": "Cargadores",
+        "owner": 2,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "electronica"
+    },
+    {
+        "id": 86,
+        "name": "Tijerita",
+        "owner": 2,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 87,
+        "name": "Cortaúñas",
+        "owner": 2,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 88,
+        "name": "Toallas baño",
+        "owner": 2,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 89,
+        "name": "Toallas piscina",
+        "owner": 2,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 90,
+        "name": "Sábanas 1 plaza",
+        "owner": 2,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 91,
+        "name": "Gillette",
+        "owner": 1,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 92,
+        "name": "Aceite/crema pelo",
+        "owner": 1,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 93,
+        "name": "Shampoo y bálsamo",
+        "owner": 1,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 94,
+        "name": "Neceser",
+        "owner": 1,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 95,
+        "name": "Jockey",
+        "owner": 1,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "abrigo"
+    },
+    {
+        "id": 96,
+        "name": "Anteojos sol",
+        "owner": 1,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 97,
+        "name": "Ropa cambio",
+        "owner": 1,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 98,
+        "name": "Pijama",
+        "owner": 1,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 99,
+        "name": "Cargadores",
+        "owner": 1,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "electronica"
+    },
+    {
+        "id": 100,
+        "name": "Cortaúñas",
+        "owner": 1,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 101,
+        "name": "Chalitas",
+        "owner": 1,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 102,
+        "name": "Placa",
+        "owner": 1,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 103,
+        "name": "Sertac",
+        "owner": 1,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 104,
+        "name": "Gotitas",
+        "owner": 1,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 105,
+        "name": "Lubricante",
+        "owner": 1,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 106,
+        "name": "Paracetamol",
+        "owner": 1,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 107,
+        "name": "Silla clack",
+        "owner": 5,
+        "loc": "Living/Estar",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 108,
+        "name": "Cojín lactancia",
+        "owner": 5,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 109,
+        "name": "Nidito",
+        "owner": 5,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 110,
+        "name": "Baranda cama",
+        "owner": 5,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 111,
+        "name": "Mochila porteo",
+        "owner": 5,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 112,
+        "name": "Coche y adaptadores",
+        "owner": 5,
+        "loc": "Living/Estar",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 113,
+        "name": "Carrito con toldo",
+        "owner": 5,
+        "loc": "Living/Estar",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 114,
+        "name": "Manta picnic",
+        "owner": 5,
+        "loc": "Living/Estar",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 115,
+        "name": "Toallas playa",
+        "owner": 5,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 116,
+        "name": "Quitasoles",
+        "owner": 5,
+        "loc": "Living/Estar",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 117,
+        "name": "Volantin",
+        "owner": 5,
+        "loc": "Living/Estar",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 118,
+        "name": "Palo selfie",
+        "owner": 5,
+        "loc": "Living/Estar",
+        "checked": false,
+        "icon": "",
+        "category": "electronica"
+    },
+    {
+        "id": 119,
+        "name": "Toallitas desinfectantes",
+        "owner": 5,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 120,
+        "name": "Alcohol gel",
+        "owner": 5,
+        "loc": "Baño",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 121,
+        "name": "Bolsa ropa sucia",
+        "owner": 5,
+        "loc": "Dormitorio",
+        "checked": false,
+        "icon": "",
+        "category": "ropa"
+    },
+    {
+        "id": 122,
+        "name": "Juegos de mesa",
+        "owner": 5,
+        "loc": "Living/Estar",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 123,
+        "name": "Juguetes playa",
+        "owner": 5,
+        "loc": "Living/Estar",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 124,
+        "name": "Scotch/Masking tape",
+        "owner": 5,
+        "loc": "Living/Estar",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 125,
+        "name": "Plumón/lápiz",
+        "owner": 5,
+        "loc": "Living/Estar",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 126,
+        "name": "Cuaderno",
+        "owner": 5,
+        "loc": "Living/Estar",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 127,
+        "name": "Caja comida",
+        "owner": 5,
+        "loc": "Cocina",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 128,
+        "name": "Cooler",
+        "owner": 5,
+        "loc": "Cocina",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 129,
+        "name": "Avena",
+        "owner": 5,
+        "loc": "Cocina",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 130,
+        "name": "Snacks",
+        "owner": 5,
+        "loc": "Cocina",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 131,
+        "name": "Bicarbonato",
+        "owner": 5,
+        "loc": "Cocina",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 132,
+        "name": "Café descafeinado",
+        "owner": 5,
+        "loc": "Cocina",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 133,
+        "name": "Crackelets",
+        "owner": 5,
+        "loc": "Cocina",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 134,
+        "name": "Almendras bolsita",
+        "owner": 5,
+        "loc": "Cocina",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 135,
+        "name": "Botella agua",
+        "owner": 5,
+        "loc": "Cocina",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 136,
+        "name": "Leche semidescremada",
+        "owner": 5,
+        "loc": "Comprar",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    },
+    {
+        "id": 137,
+        "name": "Leche sin lactosa",
+        "owner": 5,
+        "loc": "Comprar",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 138,
+        "name": "Compras Lider",
+        "owner": 5,
+        "loc": "Comprar",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 139,
+        "name": "Queque",
+        "owner": 5,
+        "loc": "Comprar",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 140,
+        "name": "Aceitunas",
+        "owner": 5,
+        "loc": "Comprar",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 141,
+        "name": "Pickles",
+        "owner": 5,
+        "loc": "Comprar",
+        "checked": false,
+        "icon": "",
+        "category": "otros"
+    },
+    {
+        "id": 142,
+        "name": "Queso crema",
+        "owner": 5,
+        "loc": "Comprar",
+        "checked": false,
+        "icon": "",
+        "category": "aseo"
+    }
+]

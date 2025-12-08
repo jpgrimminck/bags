@@ -1,0 +1,12 @@
+[
+    { "itemId": 91, "tripId": 1, "bagId": 1, "checked": false },
+    { "itemId": 92, "tripId": 1, "bagId": 1, "checked": false },
+    { "itemId": 93, "tripId": 1, "bagId": 1, "checked": false },
+    
+    { "itemId": 55, "tripId": 1, "bagId": 3, "checked": false },
+    { "itemId": 56, "tripId": 1, "bagId": 3, "checked": false },
+    { "itemId": 57, "tripId": 1, "bagId": 3, "checked": false },
+    { "itemId": 2, "tripId": 1, "bagId": 8, "checked": false },
+    { "itemId": 3, "tripId": 1, "bagId": 8, "checked": false },
+    { "itemId": 16, "tripId": 1, "bagId": 8, "checked": false }
+]

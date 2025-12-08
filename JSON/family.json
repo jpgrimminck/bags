@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "name": "Papá",
+        "icon": "👨",
+        "type": "persona",
+        "category": "padre"
+    },
+    {
+        "id": 2,
+        "name": "Mamá",
+        "icon": "👩",
+        "type": "persona",
+        "category": "padre"
+    },
+    {
+        "id": 3,
+        "name": "Sebastián",
+        "icon": "👦",
+        "type": "persona",
+        "category": "hijo"
+    },
+    {
+        "id": 4,
+        "name": "Elisa",
+        "icon": "👧",
+        "type": "persona",
+        "category": "hijo"
+    },
+    {
+        "id": 5,
+        "name": "Casa",
+        "icon": "🏠",
+        "type": "casa",
+        "category": "otro"
+    }
+]

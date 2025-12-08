@@ -1,0 +1,9 @@
+[
+    {
+        "id": 1,
+        "nombre": "Algarrobo",
+        "icono": "fa-umbrella-beach",
+        "fechaCreacion": "2025-12-04",
+        "activo": true
+    }
+]

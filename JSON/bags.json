@@ -1,0 +1,10 @@
+[
+    { "id": 1, "name": "Verde antiagua", "photo": "b1.jpeg" },
+    { "id": 2, "name": "Mochila notebook", "photo": "b2.jpeg" },
+    { "id": 3, "name": "Mochila", "photo": "b3.jpeg" },
+    { "id": 4, "name": "Cartera", "photo": "b4.jpeg" },
+    { "id": 5, "name": "Mochila gris", "photo": "b5.jpeg" },
+    { "id": 6, "name": "Mochila rosada", "photo": "b6.jpeg" },
+    { "id": 7, "name": "Cooler", "photo": "b7.jpeg" },
+    { "id": 8, "name": "Dinosaurio", "photo": "b8.jpeg" }
+]
