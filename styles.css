@@ -78,18 +78,21 @@ input, select, button { font-size: 16px !important; } /* Prevent zoom on focus *
     .family-grid { display: flex; flex-wrap: wrap; gap: 3rem; align-items: flex-start; }
     .family-column { flex: 0 0 auto; }
     .family-bags { display: flex; flex-wrap: wrap; gap: 1rem; align-items: stretch; }
-    .family-bags > div { width: 280px; flex-shrink: 0; min-height: 400px; display: flex; flex-direction: column; }
+    /* Increase card width by 50% on desktop (from 280px -> 420px) */
+    .family-bags > div { width: 420px; flex-shrink: 0; min-height: 400px; display: flex; flex-direction: column; }
     .family-bags > div details { flex: 1; }
     .bag-title-area { min-height: 3.5rem; } /* Espacio para 2 líneas de título */
 }
 
 @media (min-width: 1200px) {
-    .desktop-grid { grid-template-columns: repeat(3, 1fr); }
-    .desktop-grid-3 { grid-template-columns: repeat(4, 1fr); }
+    /* Reduce columns to increase card width by ~50% on larger desktop screens */
+    .desktop-grid { grid-template-columns: repeat(2, 1fr); }
+    .desktop-grid-3 { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (min-width: 1600px) {
-    .desktop-grid { grid-template-columns: repeat(5, 1fr); }
+    /* Keep reasonable column count for very large screens */
+    .desktop-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* Sidebar styles */

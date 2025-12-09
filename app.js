@@ -361,19 +361,14 @@ function renderBagsContent() {
                                     class="px-3 py-1.5 flex items-center justify-center rounded-full bg-green-500 text-white text-sm font-medium transition-colors hover:bg-green-600">
                                     <i class="fa-solid fa-lock mr-1"></i> <span class="font-medium text-sm">Cerrado</span>
                                 </button>
-                            ` : isRemovingMode ? `
+                                ` : isRemovingMode ? `
                                 <!-- Modo quitar items: botón Listo -->
                                 <button onclick="event.stopPropagation(); cancelRemovingItems('${bag.id}')" 
                                     class="px-3 py-1.5 flex items-center justify-center rounded-full bg-green-500 text-white text-sm font-medium transition-colors hover:bg-green-600">
                                     <i class="fa-solid fa-check mr-1"></i> <span class="font-medium text-sm">Listo</span>
                                 </button>
                             ` : `
-                                <!-- Modo normal: botones + Item y lápiz -->
-                                <a href="items.html?viaje=${currentTripId}&bolso=${bag.id}&modo=asignar" 
-                                    onclick="event.stopPropagation();"
-                                    class="px-3 py-1.5 flex items-center justify-center rounded-full bg-blue-500 text-white text-sm font-medium transition-colors hover:bg-blue-600">
-                                    <i class="fa-solid fa-plus mr-1"></i> Item
-                                </a>
+                                <!-- Modo normal: botones lápiz y + Item (pencil left, plus right) -->
                                 <!-- Botón Editar con menú -->
                                 <div class="relative">
                                     <button onclick="event.stopPropagation(); toggleBagEditMenu('${bag.id}')" 
@@ -392,6 +387,11 @@ function renderBagsContent() {
                                         </button>
                                     </div>
                                 </div>
+                                <a href="items.html?viaje=${currentTripId}&bolso=${bag.id}&modo=asignar" 
+                                    onclick="event.stopPropagation();"
+                                    class="px-3 py-1.5 flex items-center justify-center rounded-full bg-blue-500 text-white text-sm font-medium transition-colors hover:bg-blue-600">
+                                    <i class="fa-solid fa-plus mr-1"></i> Item
+                                </a>
                                 ${checkedCount === totalCount && totalCount > 0 && !isEditMode ? '<span class="text-green-500 text-sm font-bold"><i class="fa-solid fa-check-circle"></i></span>' : ''}
                             `}
                         </div>
@@ -732,7 +732,7 @@ function renderInventarioView(container) {
                  </button>
              </div>
              ` : `
-             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3" onclick="${creatingItemForOwner === familyName ? `if(!event.target.closest('.create-item-card')) cancelCreateItem();` : ''}">
+             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-3" onclick="${creatingItemForOwner === familyName ? `if(!event.target.closest('.create-item-card')) cancelCreateItem();` : ''}">
                  ${sortedItems.map(item => {
                      const isAssigned = assignedItemIds.includes(item.id);
                      const isFilterActive = tripFilterActive !== null || assignModeActive;
@@ -1200,7 +1200,7 @@ function renderConfigView(container) {
                     <i class="fa-solid fa-plus"></i> Nuevo
                 </button>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
                 ${familyMembers.filter(m => m.type === 'persona').map(member => `
                     <div class="border rounded-lg p-3 flex items-center justify-between bg-gray-50">
                         <div class="flex items-center gap-2">
@@ -1224,7 +1224,7 @@ function renderConfigView(container) {
                     <i class="fa-solid fa-plus"></i> Nueva
                 </button>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
                 ${pets.length > 0 ? pets.map(pet => `
                     <div class="border rounded-lg p-3 flex items-center justify-between bg-gray-50">
                         <div class="flex items-center gap-2">
@@ -1249,7 +1249,7 @@ function renderConfigView(container) {
                 </button>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
                 ${bags.map(bag => {
                     const parentBag = bags.find(b => b.id === bag.parentId);
                     const locationText = parentBag 
