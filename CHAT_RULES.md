@@ -46,3 +46,8 @@ Contacto / responsabilidad
 ---
 
 Este archivo debe ser leído y respetado por el asistente antes de modificar estilos o plantillas visuales en el proyecto.
+
+**Regla adicional (único punto de control visual)**
+- Todos los parámetros que modifiquen el aspecto visual del HTML deben poder modificarse en una sola sección del código (un único punto de control). Ese cambio debe verse reflejado tanto en dispositivos modernos como en dispositivos de fallback/antiguos.
+- Implementación recomendada: definir un único valor en JS (por ejemplo `const CARD_GAP = '1rem'`), exponerlo a CSS mediante una variable (`--card-gap`) y proporcionar fallback para navegadores antiguos mediante `@supports not (gap: ...)`, una clase añadida por JS (`.no-flex-gap`) y/o aplicando `margin-bottom` inline cuando sea necesario. Cambiando ese único valor se debe actualizar la apariencia en todos los dispositivos.
+
