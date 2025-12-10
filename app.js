@@ -89,6 +89,23 @@ function applyInlineCardGapIfNeeded() {
     }
 }
 
+// Normaliza la ruta del campo `photo` de un bolso.
+// Acepta valores como `b1.jpeg`, `b1.jpg`, `b1.png`, URLs o rutas ya completas.
+function normalizePhotoPath(photo) {
+    if (!photo) return '';
+    const trimmed = String(photo).trim();
+    // If it's an absolute URL or data URI, keep it
+    if (/^(https?:\/\/|data:)/i.test(trimmed)) return trimmed;
+    // If it's already pointing into images/ or starts with /, keep as-is
+    if (trimmed.startsWith('images/') || trimmed.startsWith('/')) return trimmed;
+    // Accept ONLY JPEG filenames (b1.jpg or b1.jpeg) and map them to images/bags/
+    if (/^[\w0-9\-_.]+\.(jpe?g)$/i.test(trimmed)) {
+        return `images/bags/${trimmed}`;
+    }
+    // If it's not a JPEG filename or a supported URL/path, return empty to indicate invalid
+    return '';
+}
+
 // Inicializar currentTripId y modo asignación desde la URL
 function initCurrentTripId() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -2590,7 +2607,14 @@ function closeBagModal() {
 
 function updateBagPhotoPreview() {
     const photo = document.getElementById('bagPhoto').value;
-    document.getElementById('bagPhotoPreview').src = photo || 'bag-default.jpg';
+    const normalized = normalizePhotoPath(photo);
+    // If the user provided a non-empty value but it's not a valid JPEG, don't show it
+    if (photo && !normalized) {
+        // keep preview as default and silently ignore invalid formats
+        document.getElementById('bagPhotoPreview').src = 'bag-default.jpg';
+        return;
+    }
+    document.getElementById('bagPhotoPreview').src = normalized || 'bag-default.jpg';
 }
 
 function saveBag() {
@@ -2603,11 +2627,17 @@ function saveBag() {
 
     if (!name) return alert("El nombre es obligatorio");
 
+    // Validate photo: only accept empty (no photo) or JPEG (bX.jpg/.jpeg or images/...jpg)
+    const normalizedPhoto = normalizePhotoPath(photo);
+    if (photo && !normalizedPhoto) {
+        return alert('Solo se aceptan imágenes en formato JPEG (ej. b1.jpg o b1.jpeg)');
+    }
+
     if (id) {
         const bag = bags.find(b => b.id == id); // Loose equality for string/number id
         if (bag) {
             bag.name = name;
-            bag.photo = photo;
+            bag.photo = normalizedPhoto;
             bag.type = type;
             bag.parentId = parentId;
         }
@@ -2616,7 +2646,7 @@ function saveBag() {
         const newBag = {
             id: maxId + 1,
             name: name,
-            photo: photo
+            photo: normalizedPhoto
         };
         bags.push(newBag);
     }
@@ -2987,6 +3017,8 @@ async function loadBags() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         bags = await response.json();
+        // Normalize photo paths so files like `b1.jpeg` resolve to `images/bags/b1.jpeg`
+        bags = bags.map(b => ({ ...b, photo: normalizePhotoPath(b.photo) }));
     } catch (e) {
         console.error("No se pudo cargar los bolsos:", e);
     }
