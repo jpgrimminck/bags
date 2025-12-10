@@ -113,55 +113,7 @@
         </button>
     </div>
 
-    <!-- Modal Agregar Item -->
-    <div id="modal-add" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-end items-center justify-center z-50">
-        <div class="bg-white rounded-lg p-6 w-full max-w-sm max-h-[90vh] overflow-y-auto pb-safe shadow-xl transition-transform transform translate-y-0">
-            <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-4"></div>
-            <h3 class="text-lg font-bold mb-4">Nuevos Ítems</h3>
-            
-            <label class="block text-xs font-bold text-gray-700 mb-1">Nombres de los items</label>
-            <div id="newItemsList" class="space-y-2 mb-2">
-                <input type="text" class="new-item-input w-full border p-3 rounded-lg text-base" placeholder="Ej. Pañales" enterkeyhint="next">
-            </div>
-            
-            <button onclick="addNewItemInput()" class="w-full border-2 border-dashed border-gray-300 text-gray-400 p-2 rounded-lg mb-4 flex items-center justify-center gap-2 hover:border-blue-400 hover:text-blue-500 transition-colors">
-                <i class="fa-solid fa-plus"></i> Agregar otro item
-            </button>
-            
-            <label class="block text-xs font-bold text-gray-700 mb-1">Asignar a</label>
-            <select id="newItemFamily" class="w-full border p-3 rounded-lg mb-4 text-base bg-white" onchange="onFamilyChange()">
-            </select>
-            
-            <div id="bagSelectSection" class="hidden">
-                <label class="block text-xs font-bold text-gray-700 mb-1">Bolso</label>
-                <select id="newItemBag" class="w-full border p-3 rounded-lg mb-4 text-base bg-white" onchange="checkBagType()">
-                </select>
-            </div>
-            
-            <div id="bagAutoSection" class="hidden mb-4">
-                <span class="text-xs text-gray-500">Bolso asignado:</span>
-                <span id="bagAutoName" class="text-sm font-medium text-gray-700"></span>
-            </div>
-
-            <label class="block text-xs font-bold text-gray-700 mb-1">Ubicación Casa</label>
-            <select id="newItemLocation" class="w-full border p-3 rounded-lg mb-4 text-base bg-white">
-            </select>
-
-            <div id="tempSection" class="hidden">
-                <label class="block text-xs font-bold text-gray-700 mb-1">Temperatura</label>
-                <select id="newItemTemp" class="w-full border p-3 rounded-lg mb-4 text-base bg-white">
-                    <option value="ambient">Ambiente</option>
-                    <option value="refrigerated">Refrigerado</option>
-                    <option value="frozen">Congelado</option>
-                </select>
-            </div>
-
-            <div class="flex gap-3 justify-end mt-6">
-                <button onclick="closeModal()" class="text-gray-500 px-4 py-3 w-full rounded-lg border border-gray-200">Cancelar</button>
-                <button onclick="saveNewItems()" class="bg-blue-600 text-white px-4 py-3 w-full rounded-lg font-bold shadow-lg active:bg-blue-700">Crear</button>
-            </div>
-        </div>
-    </div>
+    <!-- Add-item modal removed from this page; creation happens in items.html -->
 
     <!-- Modal Nueva Zona -->
     <div id="modal-zona" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-end items-center justify-center z-50">

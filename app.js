@@ -67,6 +67,14 @@ const CARD_GAP = '1rem';
 // actualizará los gap definidos en CSS (via --card-gap).
 try { document.documentElement.style.setProperty('--card-gap', CARD_GAP); } catch(e) { /* ignore */ }
 
+// Flag usada para indicar que llegamos a `items.html` por un redirect desde otra página
+// y que debemos suprimir ciertos enlaces/links específicos de modos (p. ej. "Crear Item para X").
+let suppressFamilyCreateLinks = false;
+// Family name to which we should surface the create card after a redirect
+let pendingCreateTargetFamily = null;
+// If user arrived with URL params for assign mode, store bagId to target after data loads
+let pendingCreateBagIdFromUrl = null;
+
 function applyInlineCardGapIfNeeded() {
     try {
         const grid = document.querySelector('.family-grid');
@@ -99,6 +107,9 @@ function initCurrentTripId() {
     if (bolsoParam && modoParam === 'asignar') {
         assignModeBagId = parseInt(bolsoParam);
         assignModeActive = true;
+        // Mark that we arrived with assign-mode via URL; later we'll target the corresponding family
+        pendingCreateBagIdFromUrl = bolsoParam;
+        suppressFamilyCreateLinks = true;
     }
     
     // Verificar si hay items recién asignados para destacar (desde sessionStorage)
@@ -664,35 +675,39 @@ function renderInventarioView(container) {
      // Función para renderizar una sección de familiar
      const renderFamilySection = (familyName, showCreateButton = false) => {
          const items = itemsByFamily[familyName];
-         if (assignModeActive && (!items || items.length === 0)) {
-             // Si no hay items pero estamos en modo asignación, mostrar solo el botón crear
-             if (assignModeActive) {
-                 const member = familyMembers.find(m => m.name === familyName);
-                 const memberIcon = member ? member.icon : '🏠';
-                 const memberId = member ? member.id : null;
-                 
-                 let sectionTitle = `ITEMS DE ${familyName.toUpperCase()}`;
-                 if (familyName === 'Papá') sectionTitle = 'ITEMS DEL PAPÁ';
-                 if (familyName === 'Mamá') sectionTitle = 'ITEMS DE LA MAMÁ';
-                 if (familyName === 'Casa') sectionTitle = 'ITEMS DE LA CASA';
-                 
-                 return `
-                 <div class="mb-6">
-                    <h3 class="sticky top-[115px] z-20 bg-gray-100 text-lg font-bold text-gray-700 py-2 px-1 -mx-1 flex items-center gap-2 static bg-transparent py-0 px-0 mx-0 mb-3">
-                         <span class="text-2xl">${memberIcon}</span> ${sectionTitle}
-                         <span class="text-sm font-normal text-gray-400">(0)</span>
-                     </h3>
-                     <div class="bg-gray-50 rounded-lg p-4 text-center">
-                         <p class="text-gray-500 mb-3">No hay items disponibles.</p>
-                         <button onclick="openCreateItemForOwner(${memberId}, '${familyName}')" 
-                             class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-                             <i class="fa-solid fa-plus mr-2"></i>Crear Item
-                         </button>
-                     </div>
-                 </div>`;
-             }
-             return '';
-         }
+        if (assignModeActive && (!items || items.length === 0)) {
+            // Si se estableció supresión de enlaces de creación (por redirect), no renderizar el bloque
+            if (suppressFamilyCreateLinks) {
+                return '';
+            }
+            // Si no hay items pero estamos en modo asignación, mostrar solo el botón crear
+            if (assignModeActive) {
+                const member = familyMembers.find(m => m.name === familyName);
+                const memberIcon = member ? member.icon : '🏠';
+                const memberId = member ? member.id : null;
+                
+                let sectionTitle = `ITEMS DE ${familyName.toUpperCase()}`;
+                if (familyName === 'Papá') sectionTitle = 'ITEMS DEL PAPÁ';
+                if (familyName === 'Mamá') sectionTitle = 'ITEMS DE LA MAMÁ';
+                if (familyName === 'Casa') sectionTitle = 'ITEMS DE LA CASA';
+                
+                return `
+                <div class="mb-6">
+                   <h3 class="sticky top-[115px] z-20 bg-gray-100 text-lg font-bold text-gray-700 py-2 px-1 -mx-1 flex items-center gap-2 static bg-transparent py-0 px-0 mx-0 mb-3">
+                        <span class="text-2xl">${memberIcon}</span> ${sectionTitle}
+                        <span class="text-sm font-normal text-gray-400">(0)</span>
+                    </h3>
+                    <div class="bg-gray-50 rounded-lg p-4 text-center">
+                        <p class="text-gray-500 mb-3">No hay items disponibles.</p>
+                        <button onclick="openCreateItemForOwner(${memberId}, '${familyName}')" 
+                            class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                            <i class="fa-solid fa-plus mr-2"></i>Crear Item
+                        </button>
+                    </div>
+                </div>`;
+            }
+            return '';
+        }
          
          const member = familyMembers.find(m => m.name === familyName);
          const memberIcon = member ? member.icon : '🏠';
@@ -825,7 +840,7 @@ function renderInventarioView(container) {
                  `}).join('')}
                  ${createCardHTML}
              </div>
-             ${assignModeActive ? `
+             ${assignModeActive && !suppressFamilyCreateLinks ? `
              <div class="mt-3 text-center">
                  <button onclick="openCreateItemForOwner(${memberId}, '${familyName}')" 
                      class="text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors">
@@ -1645,8 +1660,17 @@ function openCreateItemForOwner(ownerId, familyName) {
         returnUrl: window.location.href
     }));
     
-    // Abrir modal de creación
-    document.getElementById('modal-add').classList.remove('hidden'); 
+    // Si no estamos realmente en items.html O no existe el modal en este DOM, redirigir a `items.html`.
+    // Esto evita que pages móviles que por caching contendrían el modal lo muestren accidentalmente.
+    const modalEl = document.getElementById('modal-add');
+    if (!window.location.href.includes('items.html') || !modalEl) {
+        // La información del owner ya está en sessionStorage; items.html leerá esto y abrirá el modal
+        window.location.href = `items.html`;
+        return;
+    }
+
+    // Abrir modal de creación (solo en items.html y si el modal está presente)
+    modalEl.classList.remove('hidden'); 
     
     const itemsList = document.getElementById('newItemsList');
     itemsList.innerHTML = '<input type="text" class="new-item-input w-full border p-3 rounded-lg text-base" placeholder="Ej. Pañales" enterkeyhint="next">';
@@ -1981,7 +2005,15 @@ function openModalForBagLocked(bagId, event) {
     const bag = bags.find(b => b.id === bagId);
     if (!bag) return;
     
-    document.getElementById('modal-add').classList.remove('hidden');
+    // Si no estamos en la página de Items, redirigir a `items.html` para realizar la creación allí
+    const modalEl2 = document.getElementById('modal-add');
+    if (!window.location.href.includes('items.html') || !modalEl2) {
+        sessionStorage.setItem('createFromBagLocked', JSON.stringify({ bagId }));
+        window.location.href = `items.html`;
+        return;
+    }
+
+    modalEl2.classList.remove('hidden');
     
     const itemsList = document.getElementById('newItemsList');
     itemsList.innerHTML = '<input type="text" class="new-item-input w-full border p-3 rounded-lg text-base" placeholder="Ej. Pañales" enterkeyhint="next">';
@@ -2313,7 +2345,15 @@ function openModalWithName(name) {
 }
 
 function openModalForBag(bagId, name = '') {
-    document.getElementById('modal-add').classList.remove('hidden'); 
+    // If not on items page or the modal element is not present here, redirect to items.html
+    const modalEl3 = document.getElementById('modal-add');
+    if (!window.location.href.includes('items.html') || !modalEl3) {
+        sessionStorage.setItem('createFromBag', JSON.stringify({ bagId, name }));
+        window.location.href = `items.html`;
+        return;
+    }
+
+    modalEl3.classList.remove('hidden'); 
     
     const itemsList = document.getElementById('newItemsList');
     if (name) {
@@ -2787,9 +2827,129 @@ async function loadInventory() {
         inventory = [...inventory, ...newItems];
         
         render();
+        // Después de renderizar, procesar posibles solicitudes de creación que vinieron por redirect desde otras páginas
+        processPendingCreateSession();
     } catch (e) {
         console.error("No se pudo cargar el inventario:", e);
         render();
+        processPendingCreateSession();
+    }
+}
+
+// Procesa claves temporales en sessionStorage usadas para redirigir a items.html y abrir el modal
+function processPendingCreateSession() {
+    try {
+        // Only process pending create requests when we're on the Items page.
+        // This prevents accidental redirects when visiting other tabs (e.g., Bolsos).
+        if (!window.location.href.includes('items.html') && currentTab !== 'inventario') {
+            return;
+        }
+        const createOwnerRaw = sessionStorage.getItem('createItemOwner');
+        if (createOwnerRaw) {
+            const ctx = JSON.parse(createOwnerRaw);
+            // Limpiar para evitar loops
+            sessionStorage.removeItem('createItemOwner');
+            // Suprimir los enlaces de creación por familia y marcar familia objetivo
+            suppressFamilyCreateLinks = true;
+            pendingCreateTargetFamily = ctx.familyName;
+            render();
+            // Scroll y foco al final de la sección donde está el botón Crear
+            setTimeout(() => scrollToFamilyCreate(pendingCreateTargetFamily), 150);
+            return;
+        }
+
+        const createBagRaw = sessionStorage.getItem('createFromBag');
+        if (createBagRaw) {
+            const ctx = JSON.parse(createBagRaw);
+            sessionStorage.removeItem('createFromBag');
+            // Suprimir enlaces de creación por familia y marcar familia objetivo basada en el bolso
+            suppressFamilyCreateLinks = true;
+            // Determinar familiar asignado al bolso (si existe)
+            try {
+                const bag = bags.find(b => String(b.id) === String(ctx.bagId));
+                let assignee = null;
+                if (bag) {
+                    if (Array.isArray(bag.assignedTo)) assignee = bag.assignedTo[0];
+                    else assignee = bag.assignedTo || null;
+                }
+                // Fallback: si no hay assignee, usar 'Casa'
+                pendingCreateTargetFamily = assignee || 'Casa';
+            } catch (e) {
+                pendingCreateTargetFamily = 'Casa';
+            }
+            render();
+            setTimeout(() => scrollToFamilyCreate(pendingCreateTargetFamily), 150);
+            return;
+        }
+
+        const createBagLockedRaw = sessionStorage.getItem('createFromBagLocked');
+        if (createBagLockedRaw) {
+            const ctx = JSON.parse(createBagLockedRaw);
+            sessionStorage.removeItem('createFromBagLocked');
+            suppressFamilyCreateLinks = true;
+            try {
+                const bag = bags.find(b => String(b.id) === String(ctx.bagId));
+                let assignee = null;
+                if (bag) {
+                    if (Array.isArray(bag.assignedTo)) assignee = bag.assignedTo[0];
+                    else assignee = bag.assignedTo || null;
+                }
+                pendingCreateTargetFamily = assignee || 'Casa';
+            } catch (e) {
+                pendingCreateTargetFamily = 'Casa';
+            }
+            render();
+            setTimeout(() => scrollToFamilyCreate(pendingCreateTargetFamily), 150);
+            return;
+        }
+        // If user arrived via URL params with bolso=...&modo=asignar, target that bag's owner
+        if (pendingCreateBagIdFromUrl) {
+            try {
+                const bag = bags.find(b => String(b.id) === String(pendingCreateBagIdFromUrl));
+                let assignee = null;
+                if (bag) {
+                    if (Array.isArray(bag.assignedTo)) assignee = bag.assignedTo[0];
+                    else assignee = bag.assignedTo || null;
+                }
+                pendingCreateTargetFamily = assignee || 'Casa';
+                // already set suppressFamilyCreateLinks in initCurrentTripId
+                render();
+                setTimeout(() => scrollToFamilyCreate(pendingCreateTargetFamily), 150);
+            } catch (e) {
+                console.warn('Error processing pendingCreateBagIdFromUrl', e);
+            } finally {
+                pendingCreateBagIdFromUrl = null;
+            }
+            return;
+        }
+    } catch (e) {
+        console.error('Error procesando creación pendiente:', e);
+    }
+}
+
+// Scroll to the target family's create card and apply a brief highlight
+function scrollToFamilyCreate(familyName) {
+    if (!familyName) return;
+    try {
+        const headers = document.querySelectorAll('.family-column h3');
+        let target = null;
+        headers.forEach(h => {
+            if (!target && h.textContent && h.textContent.toLowerCase().includes(familyName.toLowerCase())) {
+                target = h.closest('.family-column');
+            }
+        });
+        if (target) {
+            // Scroll into view
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Brief highlight
+            const original = target.style.boxShadow;
+            target.style.boxShadow = '0 0 0 3px rgba(59,130,246,0.15)';
+            setTimeout(() => { target.style.boxShadow = original || ''; }, 1800);
+        }
+    } catch (e) {
+        console.warn('scrollToFamilyCreate error', e);
+    } finally {
+        pendingCreateTargetFamily = null;
     }
 }
 
