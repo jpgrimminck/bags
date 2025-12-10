@@ -59,6 +59,28 @@ let newItemMatches = []; // items que coinciden con el texto
 // Nuevos items creados (persistidos en localStorage)
 let newItems = [];
 
+/* Espacio centralizado para el gap entre tarjetas.
+   Cambia este valor en un solo lugar para que se aplique en todos los dispositivos.
+   Valor usado como fallback inline cuando el navegador no soporta `gap` en flex. */
+const CARD_GAP = '1rem';
+// Exponer la variable CSS para navegadores modernos: así cambiar CARD_GAP
+// actualizará los gap definidos en CSS (via --card-gap).
+try { document.documentElement.style.setProperty('--card-gap', CARD_GAP); } catch(e) { /* ignore */ }
+
+function applyInlineCardGapIfNeeded() {
+    try {
+        const grid = document.querySelector('.family-grid');
+        const needFallback = document.documentElement.classList.contains('no-flex-gap') || (grid && getComputedStyle(grid).gap === '0px');
+        if (!needFallback) return;
+        document.querySelectorAll('.family-column').forEach(el => {
+            el.style.marginBottom = CARD_GAP;
+        });
+    } catch (e) {
+        // fall back silently
+        console.warn('applyInlineCardGapIfNeeded error', e);
+    }
+}
+
 // Inicializar currentTripId y modo asignación desde la URL
 function initCurrentTripId() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -516,6 +538,8 @@ function renderBagsContent() {
     
     gridHTML += '</div>';
     bagsContainer.innerHTML = gridHTML;
+    // Aplicar margen inline si es necesario (fallback para navegadores sin soporte gap en flex)
+    applyInlineCardGapIfNeeded();
 }
 
 // VISTA 2: ZONAS

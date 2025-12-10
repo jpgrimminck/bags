@@ -5,6 +5,9 @@ body {
     -webkit-tap-highlight-color: transparent; 
 }
 
+/* Espacio centralizado para tarjetas: cambia este valor en un lugar o desde JS */
+:root { --card-gap: 1rem; }
+
 /* Borde verde con opacidad igual al botón cerrado */
 .bag-locked-border {
     box-shadow: 0 0 0 2px rgba(34,197,94,0.6); /* verde-500 con opacidad 0.6 */
@@ -72,7 +75,7 @@ input, select, button { font-size: 16px !important; } /* Prevent zoom on focus *
 .desktop-grid-x {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-    gap: 1.5rem;
+    gap: var(--card-gap);
 }
 
 .bag-card { height: 100%; display: flex; flex-direction: column; }
@@ -81,7 +84,7 @@ input, select, button { font-size: 16px !important; } /* Prevent zoom on focus *
 
 /* Layout helpers moved to global scope to avoid any breakpoint-based rules
    and keep behavior fully fluid across all screen sizes. */
-.family-grid { display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start; }
+.family-grid { display: flex; flex-wrap: wrap; gap: var(--card-gap); align-items: flex-start; }
 .family-column { flex: 1 1 100%; }
 .family-column.mb-6 { margin-bottom: 0rem; }
 .family-bags { display: block; width: 100%; }
@@ -93,7 +96,7 @@ input, select, button { font-size: 16px !important; } /* Prevent zoom on focus *
     to `styles-fallback.css`. This keeps core stylesheet minimal. */
 
 /* Keep desktop-grid as a single-column flex by default; desktop-grid-x handles fluid multi-column behaviour */
-.desktop-grid { display: flex; flex-direction: column; gap: 1rem; }
+.desktop-grid { display: flex; flex-direction: column; gap: var(--card-gap); }
 
 /* Remove all fixed breakpoint-based adjustments; elements that previously had mobile-only behaviour
    are kept without media queries to ensure consistent appearance across viewports. */
