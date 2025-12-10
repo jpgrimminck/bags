@@ -236,9 +236,9 @@ function renderBagsContent() {
         let sectionTitle = '';
         let iconsHTML = '';
         
-        if (ownerCount === 0) {
+            if (ownerCount === 0) {
             sectionTitle = bagCount === 1 ? 'BOLSO SIN ITEMS' : 'BOLSOS SIN ITEMS';
-            iconsHTML = '<span class="text-3xl md:text-4xl">📦</span>';
+            iconsHTML = '<span class="text-3xl text-4xl">📦</span>';
         } else if (ownerCount === 1) {
             const name = group.owners[0];
             if (name === 'Papá') {
@@ -248,7 +248,7 @@ function renderBagsContent() {
             } else {
                 sectionTitle = bagCount === 1 ? `BOLSO DE ${name.toUpperCase()}` : `BOLSOS DE ${name.toUpperCase()}`;
             }
-            iconsHTML = `<span class="text-3xl md:text-4xl">${group.icons[0]}</span>`;
+            iconsHTML = `<span class="text-3xl text-4xl">${group.icons[0]}</span>`;
         } else {
             // 2 o más dueños - categorizar cada uno
             const ownerData = group.ownerIds.map((id, idx) => {
@@ -295,17 +295,17 @@ function renderBagsContent() {
                 sectionTitle = bagCount === 1 ? `BOLSO DE ${namesText}` : `BOLSOS DE ${namesText}`;
             }
             
-            iconsHTML = group.icons.map(icon => `<span class="text-3xl md:text-4xl">${icon}</span>`).join('');
+            iconsHTML = group.icons.map(icon => `<span class="text-3xl text-4xl">${icon}</span>`).join('');
         }
         
         // Cada grupo es una columna
         gridHTML += `
-        <div class="family-column mb-6 lg:mb-0">
-            <h3 class="sticky top-[52px] z-20 bg-gray-100 text-xl md:text-2xl font-bold text-gray-700 py-1.5 px-1 -mx-1 flex flex-wrap items-center gap-x-2 gap-y-0 border-b md:static md:bg-transparent md:py-0 md:px-0 md:mx-0 md:mb-3 md:pb-2">
+        <div class="family-column mb-6">
+            <h3 class="sticky top-[52px] z-20 bg-gray-100 text-xl text-2xl font-bold text-gray-700 py-1.5 px-1 -mx-1 flex flex-wrap items-center gap-x-2 gap-y-0 border-b static bg-transparent py-0 px-0 mx-0 mb-3 pb-2">
                 <span class="flex items-center gap-1 flex-shrink-0">${iconsHTML}</span>
                 <span class="whitespace-nowrap">${sectionTitle}</span>
             </h3>
-            <div class="family-bags space-y-3 lg:space-y-0">
+                <div class="desktop-grid-x">
         `;
 
         group.bags.forEach(bag => {
@@ -336,22 +336,22 @@ function renderBagsContent() {
             gridHTML += `
                         <div class="bg-white rounded-xl shadow bag-card ${completeBorder} relative ${isLocked ? 'bag-locked-border' : ''} mt-0.5" id="bag-card-${bag.id}">
                 <!-- Header sticky del bolso -->
-                <div class="sticky top-[96px] md:static bg-white rounded-t-xl z-10 p-4 pb-2 cursor-pointer md:cursor-default" onclick="toggleBagExpand('${bag.id}')">
+                <div class="sticky top-[96px] static bg-white rounded-t-xl z-10 p-4 pb-2 cursor-pointer cursor-default" onclick="toggleBagExpand('${bag.id}')">
                     <!-- Título e ícono -->
                     <div class="flex justify-between items-center mb-2 bag-title-area">
                         <div class="flex items-center">
-                            <img src="${bag.photo || 'bag-default.jpg'}" alt="${bag.name}" class="w-12 h-12 md:w-14 md:h-14 rounded-lg object-cover mr-3">
+                            <img src="${bag.photo || 'bag-default.jpg'}" alt="${bag.name}" class="w-12 h-12 w-14 h-14 rounded-lg object-cover mr-3">
                             <div>
                                 ${isEditingName ? `
                                 <input type="text" id="edit-bag-name-input" value="${bag.name}" 
-                                    class="font-bold text-lg md:text-xl leading-tight border-b-2 border-blue-500 outline-none bg-transparent w-full"
+                                    class="font-bold text-lg text-xl leading-tight border-b-2 border-blue-500 outline-none bg-transparent w-full"
                                     onclick="event.stopPropagation()"
                                     onkeydown="if(event.key==='Enter'){saveBagName('${bag.id}', event);} if(event.key==='Escape'){cancelEditBagName(event);}">
                                 <div class="flex gap-2 mt-1">
                                     <button onclick="saveBagName('${bag.id}', event)" class="text-xs bg-blue-600 text-white px-2 py-1 rounded">Modificar</button>
                                     <button onclick="cancelEditBagName(event)" class="text-xs text-gray-500 px-2 py-1">Cancelar</button>
                                 </div>
-                                ` : `<h3 class="font-bold text-lg md:text-xl leading-tight">${bag.name}</h3>`}
+                                ` : `<h3 class="font-bold text-lg text-xl leading-tight">${bag.name}</h3>`}
                             </div>
                         </div>
                         <!-- Botones de acción -->
@@ -406,11 +406,11 @@ function renderBagsContent() {
                     </div>
                     
                     <!-- Flecha indicadora -->
-                    ${!isExpanded ? '<div class="flex justify-center mt-2 md:hidden"><i class="fa-solid fa-chevron-down text-gray-300 text-xs"></i></div>' : ''}
+                    ${!isExpanded ? '<div class="flex justify-center mt-2"><i class="fa-solid fa-chevron-down text-gray-300 text-xs"></i></div>' : ''}
                 </div>
 
                 <!-- Contenido expandible -->
-                <div class="px-4 pb-4 ${expandedClass} md:block" id="bag-content-${bag.id}">
+                <div class="px-4 pb-4 ${expandedClass} block" id="bag-content-${bag.id}">
                     ${isEditMode ? `
                     <button onclick="event.stopPropagation(); openModalForBag('${bag.id}')" 
                         class="w-full mb-3 py-2 px-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg text-sm font-medium flex items-center justify-center gap-2 border-2 border-dashed border-blue-300 transition-colors">
@@ -533,7 +533,7 @@ function renderZonasView(container) {
         locations.unshift('Comprar');
     }
 
-    let gridHTML = '<div class="desktop-grid-3">';
+    let gridHTML = '<div class="desktop-grid-x">';
 
     locations.forEach(loc => {
         const locItems = inventory.filter(i => i.loc === loc);
@@ -732,7 +732,7 @@ function renderInventarioView(container) {
                  </button>
              </div>
              ` : `
-             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-3" onclick="${creatingItemForOwner === familyName ? `if(!event.target.closest('.create-item-card')) cancelCreateItem();` : ''}">
+                 <div class="desktop-grid-x" onclick="${creatingItemForOwner === familyName ? `if(!event.target.closest('.create-item-card')) cancelCreateItem();` : ''}">
                  ${sortedItems.map(item => {
                      const isAssigned = assignedItemIds.includes(item.id);
                      const isFilterActive = tripFilterActive !== null || assignModeActive;

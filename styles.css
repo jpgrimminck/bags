@@ -63,37 +63,36 @@ body {
 input, select, button { font-size: 16px !important; } /* Prevent zoom on focus */
 
 /* Grid base para móvil */
-.desktop-grid, .desktop-grid-3 { display: flex; flex-direction: column; gap: 1rem; }
+.desktop-grid { display: flex; flex-direction: column; gap: 1rem; }
 
-/* Optimización para Desktop */
-@media (min-width: 768px) {
-    .desktop-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-    .desktop-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-    .bag-card { height: 100%; display: flex; flex-direction: column; }
-    .bag-card details { flex: 1; }
-    .bag-card ul { max-height: 400px; overflow-y: auto; }
+/* desktop-grid-x: columnas fluidas que muestran tantas tarjetas como quepan
+   - cada columna tendrá como mínimo 420px cuando haya espacio suficiente
+   - en pantallas más pequeñas las columnas se contraerán hasta 100% evitando overflow
+*/
+.desktop-grid-x {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 1.5rem;
 }
 
-@media (min-width: 1024px) {
-    .family-grid { display: flex; flex-wrap: wrap; gap: 3rem; align-items: flex-start; }
-    .family-column { flex: 0 0 auto; }
-    .family-bags { display: flex; flex-wrap: wrap; gap: 1rem; align-items: stretch; }
-    /* Increase card width by 50% on desktop (from 280px -> 420px) */
-    .family-bags > div { width: 420px; flex-shrink: 0; min-height: 400px; display: flex; flex-direction: column; }
-    .family-bags > div details { flex: 1; }
-    .bag-title-area { min-height: 3.5rem; } /* Espacio para 2 líneas de título */
-}
+.bag-card { height: 100%; display: flex; flex-direction: column; }
+.bag-card details { flex: 1; }
+.bag-card ul { max-height: 400px; overflow-y: auto; }
 
-@media (min-width: 1200px) {
-    /* Reduce columns to increase card width by ~50% on larger desktop screens */
-    .desktop-grid { grid-template-columns: repeat(2, 1fr); }
-    .desktop-grid-3 { grid-template-columns: repeat(3, 1fr); }
-}
+/* Layout helpers moved to global scope to avoid any breakpoint-based rules
+   and keep behavior fully fluid across all screen sizes. */
+.family-grid { display: flex; flex-wrap: wrap; gap: 3rem; align-items: flex-start; }
+.family-column { flex: 1 1 100%; }
+.family-bags { display: block; width: 100%; }
+.family-bags > div { flex-shrink: 0; min-height: 400px; display: flex; flex-direction: column; }
+.family-bags > div details { flex: 1; }
+.bag-title-area { min-height: 3.5rem; } /* Espacio para 2 líneas de título */
 
-@media (min-width: 1600px) {
-    /* Keep reasonable column count for very large screens */
-    .desktop-grid { grid-template-columns: repeat(3, 1fr); }
-}
+/* Keep desktop-grid as a single-column flex by default; desktop-grid-x handles fluid multi-column behaviour */
+.desktop-grid { display: flex; flex-direction: column; gap: 1rem; }
+
+/* Remove all fixed breakpoint-based adjustments; elements that previously had mobile-only behaviour
+   are kept without media queries to ensure consistent appearance across viewports. */
 
 /* Sidebar styles */
 .sidebar {
@@ -131,15 +130,8 @@ input, select, button { font-size: 16px !important; } /* Prevent zoom on focus *
 }
 
 /* Sticky bag header con sombra */
-@media (max-width: 767px) {
-    .bag-card {
-        overflow: visible;
-    }
-    .bag-card > .sticky {
-        box-shadow: 0 2px 4px -1px rgba(0,0,0,0.1);
-        z-index: 15;
-    }
-}
+.bag-card { overflow: visible; }
+.bag-card > .sticky { box-shadow: 0 2px 4px -1px rgba(0,0,0,0.1); z-index: 15; }
 
 /* Asegurar que el dropdown de búsqueda esté por encima del sticky */
 #searchDropdown {
