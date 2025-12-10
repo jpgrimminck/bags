@@ -1,0 +1,17 @@
+/* styles-fallback.css
+   Contiene reglas de respaldo para navegadores que no soportan `gap` en
+   contenedores flex (p. ej. algunas versiones de Safari/iOS).
+*/
+
+/* Fallback usando @supports: si el navegador no soporta gap, aplicamos márgenes */
+@supports not (gap: 1rem) {
+    .family-grid { gap: 0; }
+    .family-column { margin-bottom: 1rem; }
+    .family-column.mb-6 { margin-bottom: 1rem; }
+}
+
+/* JS-detected fallback: si el script añade .no-flex-gap a <html>, aplicamos
+   márgenes en los hijos para reproducir el espaciado vertical. */
+.no-flex-gap .family-grid { gap: 0; }
+.no-flex-gap .family-column { margin-bottom: 1rem; }
+.no-flex-gap .family-column.mb-6 { margin-bottom: 1rem; }
