@@ -774,13 +774,14 @@ function renderInventarioView(container) {
                              rightIcon = '<i class="fa-solid fa-suitcase text-white text-xs flex-shrink-0"></i>';
                              clickAction = `onclick="togglePendingItem(${item.id})"`;
                              cursorClass = 'cursor-pointer hover:bg-blue-700';
-                         } else {
-                             // No asignado, disponible para seleccionar
-                             cardBg = 'bg-red-100 border-2 border-red-400';
-                             rightIcon = '';
-                             clickAction = `onclick="togglePendingItem(${item.id})"`;
-                             cursorClass = 'cursor-pointer hover:bg-red-300';
-                         }
+                        } else {
+                            // No asignado, disponible para seleccionar
+                            // Mantener el fondo original (blanco) y solo mostrar borde rojo
+                            cardBg = 'bg-white border-2 border-red-400';
+                            rightIcon = '';
+                            clickAction = `onclick="togglePendingItem(${item.id})"`;
+                            cursorClass = 'cursor-pointer';
+                        }
                      } else if (tripFilterActive === 1) {
                          // Modo selección para viaje Algarrobo
                          const isSelected = selectedItemsForTrip.includes(item.id);
@@ -799,7 +800,8 @@ function renderInventarioView(container) {
                      } else if (isFilterActive) {
                          // Modo filtro de viaje (antiguo)
                          const hasBag = item.bag ? true : false;
-                         cardBg = hasBag ? 'bg-white border border-transparent' : 'bg-red-50 border border-red-200';
+                         // Si no tiene bolso, mostrar borde rojo pero conservar fondo original
+                         cardBg = hasBag ? 'bg-white border border-transparent' : 'bg-white border border-red-200';
                          rightIcon = hasBag ? '<i class="fa-solid fa-suitcase text-blue-500 text-xs flex-shrink-0"></i>' : '';
                          clickAction = !hasBag ? `onclick="showBagSelector(${item.id}, '${familyName}')"` : '';
                          cursorClass = !hasBag ? 'cursor-pointer' : '';
@@ -946,6 +948,19 @@ function renderInventarioView(container) {
                 <button ${buttonAction}
                     class="block w-full ${buttonStyle} text-center py-4 rounded-xl font-bold text-lg shadow-lg transition-colors">
                     ${buttonText}
+                </button>
+            </div>
+            <div class="h-20"></div><!-- Espaciador para el botón flotante -->`;
+        } else {
+            // No hay items pendientes: mostrar botón para volver a la vista de bolsos
+            const backAction = `onclick="window.location.href='index.html?viaje=${currentTripId}'"`;
+            const backText = `<i class="fa-solid fa-arrow-left mr-2"></i> Volver a bolsos`;
+            const backStyle = 'bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-50';
+            floatingButtonHTML = `
+            <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 shadow-lg z-40">
+                <button ${backAction}
+                    class="block w-full ${backStyle} text-center py-4 rounded-xl font-bold text-lg shadow-lg transition-colors">
+                    ${backText}
                 </button>
             </div>
             <div class="h-20"></div><!-- Espaciador para el botón flotante -->`;
