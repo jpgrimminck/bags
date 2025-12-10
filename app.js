@@ -186,13 +186,13 @@ function renderBagsContent() {
     const bagsContainer = document.getElementById('bagsContainer');
     if (!bagsContainer) return;
     
-    // Obtener IDs de bolsos que tienen items en el viaje actual
-    const bagsWithItemsInTrip = [...new Set(
-        itemsTrips.filter(it => it.tripId === currentTripId).map(it => it.bagId)
-    )];
+        // Obtener IDs de bolsos que tienen items en el viaje actual
+        const bagsWithItemsInTrip = [...new Set(
+            itemsTrips.filter(it => it.tripId === currentTripId).map(it => it.bagId)
+        )];
     
-    // Filtrar solo bolsos principales que tienen items en este viaje
-    const mainBags = bags.filter(b => !b.parentId && bagsWithItemsInTrip.includes(b.id));
+        // Filtrar solo bolsos principales que tienen items en este viaje
+        const mainBags = bags.filter(b => !b.parentId && bagsWithItemsInTrip.includes(b.id));
 
     // Agrupar bolsos por "firma" de dueños (conjunto único de owners)
     const bagGroups = {};
@@ -468,7 +468,7 @@ function renderBagsContent() {
                                 
                                 // Header del grupo de dueño (solo si hay más de 1 dueño)
                                 if (sortedOwners.length > 1) {
-                                    html += '<li class="sticky top-[195px] md:static z-[5] bg-white text-xs text-gray-400 pt-3 pb-1 flex items-center gap-1.5 -mx-4 px-4">' +
+                                    html += '<li class="sticky top-[195px] static z-[5] bg-white text-xs text-gray-400 pt-3 pb-1 flex items-center gap-1.5 -mx-4 px-4">' +
                                         '<span class="text-sm">' + ownerIcon + '</span>' +
                                         '<span>' + ownerLabel + '</span>' +
                                     '</li>';
@@ -522,7 +522,7 @@ function renderBagsContent() {
 function renderZonasView(container) {
     container.innerHTML += `
         <div class="mb-6">
-            <h2 class="text-2xl md:text-3xl font-bold text-gray-800">🏠 Recolección por Zona</h2>
+            <h2 class="text-3xl font-bold text-gray-800">🏠 Recolección por Zona</h2>
             <p class="text-sm text-gray-500">Recorre la casa una sola vez.</p>
         </div>`;
 
@@ -654,7 +654,7 @@ function renderInventarioView(container) {
                  
                  return `
                  <div class="mb-6">
-                     <h3 class="sticky top-[115px] z-20 bg-gray-100 text-lg font-bold text-gray-700 py-2 px-1 -mx-1 flex items-center gap-2 md:static md:bg-transparent md:py-0 md:px-0 md:mx-0 md:mb-3">
+                    <h3 class="sticky top-[115px] z-20 bg-gray-100 text-lg font-bold text-gray-700 py-2 px-1 -mx-1 flex items-center gap-2 static bg-transparent py-0 px-0 mx-0 mb-3">
                          <span class="text-2xl">${memberIcon}</span> ${sectionTitle}
                          <span class="text-sm font-normal text-gray-400">(0)</span>
                      </h3>
@@ -719,7 +719,7 @@ function renderInventarioView(container) {
          
          return `
          <div class="mb-6">
-             <h3 class="sticky top-[115px] z-20 bg-gray-100 text-lg font-bold text-gray-700 py-2 px-1 -mx-1 flex items-center gap-2 md:static md:bg-transparent md:py-0 md:px-0 md:mx-0 md:mb-3">
+             <h3 class="sticky top-[115px] z-20 bg-gray-100 text-lg font-bold text-gray-700 py-2 px-1 -mx-1 flex items-center gap-2 static bg-transparent py-0 px-0 mx-0 mb-3">
                  <span class="text-2xl">${memberIcon}</span> ${sectionTitle}
                  <span class="text-sm font-normal text-gray-400">(${itemCount})</span>
              </h3>
@@ -853,8 +853,8 @@ function renderInventarioView(container) {
              ownersIconsHTML = bagOwners.map(o => `<span class="text-2xl">${o.icon}</span>`).join('');
          }
          
-         headerHTML = `
-         <div class="sticky top-[52px] z-30 bg-blue-600 text-white py-3 -mx-4 px-4 md:-mx-6 md:px-6 lg:-mx-8 lg:px-8 xl:-mx-12 xl:px-12 mb-4 rounded-lg shadow-lg">
+        headerHTML = `
+         <div class="sticky top-[52px] z-30 bg-blue-600 text-white py-3 -mx-4 px-4 mb-4 rounded-lg shadow-lg">
              <div class="flex items-center gap-3">
                  <img src="${assignModeBag.photo || 'bag-default.jpg'}" class="w-10 h-10 rounded-lg object-cover">
                  <div class="flex-1">
@@ -864,7 +864,7 @@ function renderInventarioView(container) {
          </div>`;
      } else {
          headerHTML = `
-         <div class="sticky top-[65px] z-30 bg-gray-100 py-3 -mx-4 px-4 md:-mx-6 md:px-6 lg:-mx-8 lg:px-8 xl:-mx-12 xl:px-12 mb-4">
+         <div class="sticky top-[65px] z-30 bg-gray-100 py-3 -mx-4 px-4 mb-4">
              <div class="flex flex-wrap gap-2 overflow-x-auto">
                  ${allTrips.map(trip => `
                      <button onclick="toggleTripFilter(${trip.id})" id="btn-trip-filter-${trip.id}" 
@@ -978,10 +978,10 @@ function showTripBagsModal() {
     // Crear modal
     const modal = document.createElement('div');
     modal.id = 'tripBagsModal';
-    modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-end md:items-center justify-center z-50';
+    modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-end items-center justify-center z-50';
     modal.innerHTML = `
-        <div class="bg-white rounded-t-2xl md:rounded-lg p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
-            <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-4 md:hidden"></div>
+        <div class="bg-white rounded-t-2xl rounded-lg p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
+            <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-4 hidden"></div>
             <h3 class="text-lg font-bold mb-4 text-gray-800">Seleccionar Bolso</h3>
             <p class="text-sm text-gray-600 mb-4">Elige un bolso para agregar los ${selectedItemsForTrip.length} items seleccionados.</p>
             
@@ -1037,10 +1037,10 @@ function showUnusedBagsModal() {
     // Crear modal
     const modal = document.createElement('div');
     modal.id = 'unusedBagsModal';
-    modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-end md:items-center justify-center z-50';
+    modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-end items-center justify-center z-50';
     modal.innerHTML = `
-        <div class="bg-white rounded-t-2xl md:rounded-lg p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
-            <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-4 md:hidden"></div>
+        <div class="bg-white rounded-t-2xl rounded-lg p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
+            <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-4 hidden"></div>
             <h3 class="text-lg font-bold mb-4 text-gray-800">Agregar Bolso Existente</h3>
             <p class="text-sm text-gray-600 mb-4">Selecciona un bolso que aún no se usa en este viaje.</p>
             
@@ -1090,10 +1090,10 @@ function showCreateBagModal() {
     // Crear modal para crear nuevo bolso
     const modal = document.createElement('div');
     modal.id = 'createBagModal';
-    modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-end md:items-center justify-center z-50';
+    modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-end items-center justify-center z-50';
     modal.innerHTML = `
-        <div class="bg-white rounded-t-2xl md:rounded-lg p-6 w-full max-w-sm">
-            <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-4 md:hidden"></div>
+        <div class="bg-white rounded-t-2xl rounded-lg p-6 w-full max-w-sm">
+            <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-4 hidden"></div>
             <h3 class="text-lg font-bold mb-4 text-gray-800">Crear Nuevo Bolso</h3>
             
             <label class="block text-sm font-bold text-gray-700 mb-2">Nombre del bolso</label>
@@ -1161,7 +1161,7 @@ function createNewBag() {
 function renderConfigView(container) {
     container.innerHTML += `
         <div class="mb-6">
-            <h2 class="text-2xl md:text-3xl font-bold text-gray-800">⚙️ Configuración</h2>
+            <h2 class="text-2xl text-3xl font-bold text-gray-800">⚙️ Configuración</h2>
             <p class="text-sm text-gray-500">Gestiona bolsos, capacidades y asignaciones.</p>
         </div>
 
@@ -1200,7 +1200,7 @@ function renderConfigView(container) {
                     <i class="fa-solid fa-plus"></i> Nuevo
                 </button>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <div class="desktop-grid-x gap-3">
                 ${familyMembers.filter(m => m.type === 'persona').map(member => `
                     <div class="border rounded-lg p-3 flex items-center justify-between bg-gray-50">
                         <div class="flex items-center gap-2">
@@ -1224,7 +1224,7 @@ function renderConfigView(container) {
                     <i class="fa-solid fa-plus"></i> Nueva
                 </button>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <div class="desktop-grid-x gap-3">
                 ${pets.length > 0 ? pets.map(pet => `
                     <div class="border rounded-lg p-3 flex items-center justify-between bg-gray-50">
                         <div class="flex items-center gap-2">
@@ -1249,7 +1249,7 @@ function renderConfigView(container) {
                 </button>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+            <div class="desktop-grid-x gap-4">
                 ${bags.map(bag => {
                     const parentBag = bags.find(b => b.id === bag.parentId);
                     const locationText = parentBag 
@@ -1528,10 +1528,10 @@ function showBagSelector(itemId, familyName) {
         </button>`
     ).join('');    const modal = document.createElement('div');
     modal.id = 'bag-selector-modal';
-    modal.className = 'fixed inset-0 bg-gray-900 bg-opacity-50 flex items-end md:items-center justify-center z-50';
+    modal.className = 'fixed inset-0 bg-gray-900 bg-opacity-50 flex items-end items-center justify-center z-50';
     modal.innerHTML = `
-        <div class="bg-white rounded-t-2xl md:rounded-lg p-6 w-full md:w-11/12 max-w-sm max-h-[80vh] overflow-y-auto shadow-xl">
-            <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-4 md:hidden"></div>
+        <div class="bg-white rounded-t-2xl rounded-lg p-6 w-full w-11/12 max-w-sm max-h-[80vh] overflow-y-auto shadow-xl">
+            <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-4 hidden"></div>
             <h3 class="text-lg font-bold mb-2">Asignar a bolso</h3>
             <p class="text-sm text-gray-500 mb-4">¿En qué bolso quieres incluir "<strong>${item.name}</strong>"?</p>
             <div class="space-y-2">
