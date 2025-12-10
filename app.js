@@ -756,7 +756,7 @@ function renderInventarioView(container) {
                  </button>
              </div>
              ` : `
-                 <div class="desktop-grid-x" onclick="${creatingItemForOwner === familyName ? `if(!event.target.closest('.create-item-card')) cancelCreateItem();` : ''}">
+                 <div class="desktop-grid-x items-grid" onclick="${creatingItemForOwner === familyName ? `if(!event.target.closest('.create-item-card')) cancelCreateItem();` : ''}">
                  ${sortedItems.map(item => {
                      const isAssigned = assignedItemIds.includes(item.id);
                      const isFilterActive = tripFilterActive !== null || assignModeActive;
@@ -901,90 +901,66 @@ function renderInventarioView(container) {
          </div>`;
      }
      
-     // Botón flotante para volver a bolsos (solo en modo asignación)
-     let floatingButtonHTML = '';
-     if (assignModeActive) {
-         const pendingCount = pendingAssignItems.length;
-         let buttonText = '';
-         
-         if (pendingCount > 0) {
-             // Agrupar items pendientes por dueño
-             const pendingByOwner = {};
-             pendingAssignItems.forEach(itemId => {
-                 const item = inventory.find(i => i.id === itemId);
-                 if (item) {
-                     const ownerMember = familyMembers.find(m => m.id === item.owner);
-                     const ownerKey = ownerMember ? ownerMember.name : 'Casa';
-                     if (!pendingByOwner[ownerKey]) {
-                         pendingByOwner[ownerKey] = { count: 0, icon: ownerMember ? ownerMember.icon : '🏠' };
-                     }
-                     pendingByOwner[ownerKey].count++;
-                 }
-             });
-             
-             // Separar entre dueños originales del bolso y nuevos
-             const originalOwnerItems = [];
-             const newOwnerItems = [];
-             
-             Object.keys(pendingByOwner).forEach(ownerName => {
-                 const data = pendingByOwner[ownerName];
-                 if (bagOwnerNames.includes(ownerName)) {
-                     originalOwnerItems.push({ name: ownerName, ...data });
-                 } else {
-                     newOwnerItems.push({ name: ownerName, ...data });
-                 }
-             });
-             
-             // Construir texto del botón
-             if (newOwnerItems.length === 0) {
-                 // Solo items de los dueños originales
-                 buttonText = `<i class="fa-solid fa-arrow-left mr-2"></i> Agregar ${pendingCount} Item${pendingCount > 1 ? 's' : ''}`;
-             } else {
-                 // Hay items de otros familiares
-                 let parts = [];
-                 
-                 // Primero los originales
-                 originalOwnerItems.forEach(owner => {
-                     parts.push(`${owner.count} ${owner.icon}`);
-                 });
-                 
-                 // Luego los nuevos
-                 newOwnerItems.forEach(owner => {
-                     parts.push(`${owner.count} ${owner.icon}`);
-                 });
-                 
-                 buttonText = `<i class="fa-solid fa-arrow-left mr-2"></i> Agregar ${parts.join(' y ')}`;
-             }
-         } else {
-             buttonText = `<i class="fa-solid fa-arrow-left mr-2"></i> Volver a Bolsos`;
-         }
-         
-         const buttonAction = pendingCount > 0 
-             ? `onclick="confirmPendingItems()"`
-             : `onclick="window.location.href='index.html?viaje=${currentTripId}'"`;
-         const buttonStyle = pendingCount > 0 
-             ? 'bg-blue-600 border-2 border-blue-600 text-white hover:bg-blue-700'
-             : 'bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-50';
-         
-         floatingButtonHTML = `
-         <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 shadow-lg z-40">
-             <button ${buttonAction}
-                 class="block w-full ${buttonStyle} text-center py-4 rounded-xl font-bold text-lg shadow-lg transition-colors">
-                 ${buttonText}
-             </button>
-         </div>
-         <div class="h-20"></div><!-- Espaciador para el botón flotante -->`;
-     } else if (tripFilterActive === 1 && selectedItemsForTrip.length > 0) {
-         const selectedCount = selectedItemsForTrip.length;
-         floatingButtonHTML = `
-         <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 shadow-lg z-40">
-             <button onclick="showTripBagsModal()"
-                 class="block w-full bg-green-600 text-white text-center py-4 rounded-xl font-bold text-lg shadow-lg transition-colors hover:bg-green-700">
-                 <i class="fa-solid fa-plus mr-2"></i>Agregar al viaje (${selectedCount})
-             </button>
-         </div>
-         <div class="h-20"></div><!-- Espaciador para el botón flotante -->`;
-     }
+    // Botón flotante para volver a bolsos (solo en modo asignación)
+    let floatingButtonHTML = '';
+    if (assignModeActive) {
+        const pendingCount = pendingAssignItems.length;
+
+        if (pendingCount > 0) {
+            // Agrupar items pendientes por dueño
+            const pendingByOwner = {};
+            pendingAssignItems.forEach(itemId => {
+                const item = inventory.find(i => i.id === itemId);
+                if (item) {
+                    const ownerMember = familyMembers.find(m => m.id === item.owner);
+                    const ownerKey = ownerMember ? ownerMember.name : 'Casa';
+                    if (!pendingByOwner[ownerKey]) {
+                        pendingByOwner[ownerKey] = { count: 0, icon: ownerMember ? ownerMember.icon : '🏠' };
+                    }
+                    pendingByOwner[ownerKey].count++;
+                }
+            });
+
+            // Separar entre dueños originales del bolso y nuevos
+            const originalOwnerItems = [];
+            const newOwnerItems = [];
+
+            Object.keys(pendingByOwner).forEach(ownerName => {
+                const data = pendingByOwner[ownerName];
+                if (bagOwnerNames.includes(ownerName)) {
+                    originalOwnerItems.push({ name: ownerName, ...data });
+                } else {
+                    newOwnerItems.push({ name: ownerName, ...data });
+                }
+            });
+
+            // Construir texto y acción del botón
+            const buttonAction = `onclick="${pendingCount > 0 ? 'confirmPendingItems()' : `window.location.href='index.html?viaje=${currentTripId}'` }"`;
+            const buttonText = `<i class="fa-solid fa-arrow-left mr-2"></i> Agregar ${pendingCount} Item${pendingCount > 1 ? 's' : ''}`;
+            const buttonStyle = pendingCount > 0
+                ? 'bg-blue-600 border-2 border-blue-600 text-white hover:bg-blue-700'
+                : 'bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-50';
+
+            floatingButtonHTML = `
+            <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 shadow-lg z-40">
+                <button ${buttonAction}
+                    class="block w-full ${buttonStyle} text-center py-4 rounded-xl font-bold text-lg shadow-lg transition-colors">
+                    ${buttonText}
+                </button>
+            </div>
+            <div class="h-20"></div><!-- Espaciador para el botón flotante -->`;
+        }
+    } else if (tripFilterActive === 1 && selectedItemsForTrip.length > 0) {
+        const selectedCount = selectedItemsForTrip.length;
+        floatingButtonHTML = `
+        <div class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 shadow-lg z-40">
+            <button onclick="showTripBagsModal()"
+                class="block w-full bg-green-600 text-white text-center py-4 rounded-xl font-bold text-lg shadow-lg transition-colors hover:bg-green-700">
+                <i class="fa-solid fa-plus mr-2"></i>Agregar al viaje (${selectedCount})
+            </button>
+        </div>
+        <div class="h-20"></div><!-- Espaciador para el botón flotante -->`;
+    }
      
      container.innerHTML += `
         ${headerHTML}
