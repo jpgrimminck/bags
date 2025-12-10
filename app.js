@@ -98,12 +98,12 @@ function normalizePhotoPath(photo) {
     if (/^(https?:\/\/|data:)/i.test(trimmed)) return trimmed;
     // If it's already pointing into images/ or starts with /, keep as-is
     if (trimmed.startsWith('images/') || trimmed.startsWith('/')) return trimmed;
-    // Accept ONLY JPEG filenames (b1.jpg or b1.jpeg) and map them to images/bags/
-    if (/^[\w0-9\-_.]+\.(jpe?g)$/i.test(trimmed)) {
+    // If it's a simple filename (b1.jpg, b2.jpeg, etc.) add images/bags/
+    if (/^[\w0-9\-_.]+\.(jpe?g|png|svg)$/i.test(trimmed)) {
         return `images/bags/${trimmed}`;
     }
-    // If it's not a JPEG filename or a supported URL/path, return empty to indicate invalid
-    return '';
+    // Fallback: return as provided
+    return trimmed;
 }
 
 // Inicializar currentTripId y modo asignación desde la URL
@@ -2607,14 +2607,7 @@ function closeBagModal() {
 
 function updateBagPhotoPreview() {
     const photo = document.getElementById('bagPhoto').value;
-    const normalized = normalizePhotoPath(photo);
-    // If the user provided a non-empty value but it's not a valid JPEG, don't show it
-    if (photo && !normalized) {
-        // keep preview as default and silently ignore invalid formats
-        document.getElementById('bagPhotoPreview').src = 'bag-default.jpg';
-        return;
-    }
-    document.getElementById('bagPhotoPreview').src = normalized || 'bag-default.jpg';
+    document.getElementById('bagPhotoPreview').src = normalizePhotoPath(photo) || 'bag-default.jpg';
 }
 
 function saveBag() {
@@ -2627,17 +2620,11 @@ function saveBag() {
 
     if (!name) return alert("El nombre es obligatorio");
 
-    // Validate photo: only accept empty (no photo) or JPEG (bX.jpg/.jpeg or images/...jpg)
-    const normalizedPhoto = normalizePhotoPath(photo);
-    if (photo && !normalizedPhoto) {
-        return alert('Solo se aceptan imágenes en formato JPEG (ej. b1.jpg o b1.jpeg)');
-    }
-
     if (id) {
         const bag = bags.find(b => b.id == id); // Loose equality for string/number id
         if (bag) {
             bag.name = name;
-            bag.photo = normalizedPhoto;
+            bag.photo = normalizePhotoPath(photo);
             bag.type = type;
             bag.parentId = parentId;
         }
@@ -2646,7 +2633,7 @@ function saveBag() {
         const newBag = {
             id: maxId + 1,
             name: name,
-            photo: normalizedPhoto
+            photo: normalizePhotoPath(photo)
         };
         bags.push(newBag);
     }
