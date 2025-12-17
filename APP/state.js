@@ -59,10 +59,24 @@ export const state = {
   // Nuevos items creados (persistidos en localStorage)
   newItems: [],
 
-  // Flags para flow de creación centralizado
+  // Espacio centralizado para el gap entre tarjetas
+  CARD_GAP: '1rem',
+
+  // Flag usada para indicar que llegamos a `items.html` por un redirect desde otra página
   suppressFamilyCreateLinks: false,
   pendingCreateTargetFamily: null,
-  pendingCreateBagIdFromUrl: null
+  pendingCreateBagIdFromUrl: null,
+
+  // Variable global para el nombre del viaje
+  currentTripName: '',
+
+  // Data arrays
+  availableLocations: [],
+  itemCategories: [],
+  inventory: [],
+  bags: [],
+  familyMembers: [],
+  pets: []
 };
 
 // Helper to replace mutable root-level variables in legacy code if needed
@@ -71,4 +85,6 @@ export function attachToWindow() {
   if (!window.__APP_STATE__) window.__APP_STATE__ = state;
   // Also expose top-level names for existing code paths that reference them directly
   Object.keys(state).forEach(k => { window[k] = state[k]; });
+  // Expose CARD_GAP as constant
+  window.CARD_GAP = state.CARD_GAP;
 }
