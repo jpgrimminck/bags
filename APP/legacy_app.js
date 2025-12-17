@@ -1201,6 +1201,7 @@ function createNewBag() {
         assignItemToBag(itemId, newId);
     });
     selectedItemsForTrip = [];
+    saveItemsTrips();
     render();
 }
 
@@ -1656,7 +1657,10 @@ function confirmPendingItems() {
     
     // Guardar items para destacar después de navegar
     sessionStorage.setItem('highlightItems', JSON.stringify(newlyAssignedItems));
-    
+
+    // Guardar cambios en localStorage
+    saveItemsTrips();
+
     // Navegar de vuelta a bolsos
     window.location.href = `index.html?viaje=${currentTripId}`;
 }
@@ -1750,13 +1754,14 @@ function clearLocalData() {
 function assignItemToBag(itemId, bagId) {
     const item = inventory.find(i => i.id === itemId);
     if (!item) return;
-    
+
     item.bag = bagId;
     // Actualizar bagId en itemsTrips
     const tripItem = itemsTrips.find(it => it.itemId === itemId && it.tripId === currentTripId);
     if (tripItem) {
         tripItem.bagId = bagId;
     }
+    saveItemsTrips();
     closeBagSelector();
     render();
 }
@@ -1967,6 +1972,7 @@ function removeItemFromBag(itemId, bagId) {
         tripItem.bagId = null;
         tripItem.checked = false;
     }
+    saveItemsTrips();
     
     const itemElement = document.querySelector(`[data-item-id="${itemId}"]`);
     if (itemElement) {
@@ -2195,6 +2201,7 @@ function toggleItem(id, bagId) {
     if (tripItem) {
         tripItem.checked = !tripItem.checked;
     }
+    saveItemsTrips();
     
     const newChecked = tripItem ? tripItem.checked : !item.checked;
     
@@ -3024,17 +3031,22 @@ async function loadBags() {
     }
 }
 
-// Cargar relaciones items-viajes desde items_trips.json
+// Cargar relaciones items-viajes desde items_trips.json o localStorage
 async function loadItemsTrips() {
-    try {
-        const response = await fetch('JSON/items_trips.json');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+    const stored = localStorage.getItem('itemsTrips');
+    if (stored) {
+        itemsTrips = JSON.parse(stored);
+    } else {
+        try {
+            const response = await fetch('JSON/items_trips.json');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            itemsTrips = await response.json();
+        } catch (e) {
+            console.error("No se pudo cargar items_trips:", e);
+            itemsTrips = [];
         }
-        itemsTrips = await response.json();
-    } catch (e) {
-        console.error("No se pudo cargar items_trips:", e);
-        itemsTrips = [];
     }
 }
 
@@ -3080,6 +3092,11 @@ async function loadTripName() {
             tripTitle.textContent = 'Viaje';
         }
     }
+}
+
+// Función para guardar itemsTrips en localStorage
+function saveItemsTrips() {
+    localStorage.setItem('itemsTrips', JSON.stringify(itemsTrips));
 }
 
 // Modal para desbloquear bolso
