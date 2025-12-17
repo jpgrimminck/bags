@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Family Trip Packer - Viajes</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -217,16 +215,9 @@
         </div>
     </div>
 
-    <script src="data.js"></script>
-    <script type="module" src="APP/main.js"></script>
-    <script src="APP/legacy_app.js"></script>
-    <script>
-        // Toggle Sidebar
-        // Sidebar and header behavior provided by app.js
-        
-        // Vista específica: Viajes
-        currentTab = 'viajes';
-        initCurrentTripId();
+    <script type="module">
+        import { initApp } from './APP/main.js';
+        initApp('viajes');
 
         // Cargar viajes desde JSON
         async function cargarViajes() {
@@ -259,7 +250,7 @@
         }
         
         // Crear nuevo viaje (placeholder)
-        function crearNuevoViaje() {
+        window.crearNuevoViaje = function() {
             alert('Próximamente: Crear nuevo viaje');
         }
         

@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Family Trip Packer - Items</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -262,15 +260,9 @@
         </div>
     </div>
 
-    <script src="data.js"></script>
-    <script type="module" src="APP/main.js"></script>
-    <script src="APP/legacy_app.js"></script>
-    <script>
-        // Vista específica: Inventario
-        currentTab = 'inventario';
-        initCurrentTripId();
-        loadFamily().then(() => loadPets()).then(() => loadBags()).then(() => loadItemsTrips()).then(() => loadInventory());
-        loadTripName();
+    <script type="module">
+        import { initApp } from './APP/main.js';
+        initApp('inventario');
     </script>
 </body>
 </html>

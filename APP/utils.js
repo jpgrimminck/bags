@@ -52,3 +52,62 @@ export function scrollToFamilyCreate(familyName) {
 export function attachCssVars() {
   try { exposeCssVars(); } catch(e){}
 }
+
+import { state } from './state.js';
+
+// Obtener items de un bolso para el viaje actual
+export function getItemsForBag(bagId) {
+    // Obtener relaciones de items para este bolso y viaje actual
+    const relations = state.itemsTrips.filter(it => it.bagId === bagId && it.tripId === state.currentTripId);
+    
+    // Obtener los items correspondientes
+    return relations.map(rel => {
+        const item = state.inventory.find(i => i.id === rel.itemId);
+        if (item) {
+            return { ...item, checked: rel.checked, bag: rel.bagId };
+        }
+        return null;
+    }).filter(i => i);
+}
+
+// Calcula dinámicamente a quién está asignado un bolso según sus items
+export function getBagAssignment(bagId) {
+    // Obtener items de este bolso para el viaje actual
+    const bagItems = getItemsForBag(bagId);
+    
+    if (bagItems.length === 0) {
+        return { names: [], display: 'Sin items', icons: '' };
+    }
+    
+    // Obtener owners únicos de los items
+    const ownerIds = [...new Set(bagItems.map(item => item.owner).filter(o => o))];
+    
+    if (ownerIds.length === 0) {
+        return { names: [], display: 'Sin asignar', icons: '' };
+    }
+    
+    // Buscar los familiares/mascotas correspondientes
+    const owners = ownerIds.map(ownerId => {
+        const member = state.familyMembers.find(m => m.id === ownerId);
+        return member ? { name: member.name, icon: member.icon } : null;
+    }).filter(o => o);
+    
+    if (owners.length === 0) {
+        return { names: [], display: 'Sin asignar', icons: '' };
+    }
+    
+    if (owners.length === 1) {
+        return {
+            names: [owners[0].name],
+            display: owners[0].name,
+            icons: owners[0].icon
+        };
+    }
+    
+    // Múltiples owners
+    return {
+        names: owners.map(o => o.name),
+        display: owners.map(o => o.name).join(', '),
+        icons: owners.map(o => o.icon).join(' ')
+    };
+}
