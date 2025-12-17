@@ -149,7 +149,7 @@ export function renderBagsContent() {
         // Cada grupo es una columna
         gridHTML += `
         <div class="family-column mb-6">
-            <h3 class="sticky top-[52px] z-20 bg-gray-100 text-xl text-2xl font-bold text-gray-700 py-1.5 px-1 -mx-1 flex flex-wrap items-center gap-x-2 gap-y-0 border-b static bg-transparent py-0 px-0 mx-0 mb-3 pb-2">
+            <h3 class="sticky top-[52px] z-20 bg-gray-100 text-2xl font-bold text-gray-700 py-1.5 px-4 flex items-center gap-2 border-b mb-3 pb-2">
                 <span class="flex items-center gap-1 flex-shrink-0">${iconsHTML}</span>
                 <span class="whitespace-nowrap">${sectionTitle}</span>
             </h3>

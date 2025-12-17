@@ -55,8 +55,14 @@ body {
 .mr-1 { margin-right: 0.25rem; }
 .mr-2 { margin-right: 0.5rem; }
 .mr-3 { margin-right: 0.75rem; }
-.w-full { width: 100%; }
-.h-full { height: 100%; }
+	.w-full { width: 100%; box-sizing: border-box; }
+	.h-full { height: 100%; }
+
+/* Ensure main app container includes padding in width calculations to avoid overflow */
+#app { box-sizing: border-box; max-width: 100%; }
+
+/* Override: remove internal padding on #app even if .p-4 is applied, layout expects edge-to-edge columns */
+#app.p-4 { padding: 0 !important; }
 .w-6 { width: 1.5rem; }
 .h-6 { height: 1.5rem; }
 .w-8 { width: 2rem; }
@@ -65,6 +71,11 @@ body {
 .h-10 { height: 2.5rem; }
 .w-12 { width: 3rem; }
 .h-12 { height: 3rem; }
+/* Additional sizes */
+.w-14 { width: 3.5rem; }
+.h-14 { height: 3.5rem; }
+/* Utility for 0.75rem height used in progress bars */
+.h-3 { height: 0.75rem; }
 .text-xs { font-size: 0.75rem; }
 .text-sm { font-size: 0.875rem; }
 .text-base { font-size: 1rem; }
@@ -93,8 +104,7 @@ body {
 .bg-gray-100 { background-color: #f3f4f6; }
 .bg-gray-200 { background-color: #e5e7eb; }
 .bg-blue-50 { background-color: #eff6ff; }
-.bg-blue-100 { background-color: #dbeafe; }
-.bg-blue-600 { background-color: #2563eb; }
+.bg-blue-100 { background-color: #dbeafe; }	.bg-blue-500 { background-color: #3b82f6; }.bg-blue-600 { background-color: #2563eb; }
 .bg-green-500 { background-color: #22c55e; }
 .bg-green-600 { background-color: #16a34a; }
 .bg-red-50 { background-color: #fef2f2; }
@@ -140,8 +150,12 @@ body {
 /* Additional missing utilities */
 .mx-auto { margin-left: auto; margin-right: auto; }
 .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+/* py-1_5 is the underscore variant (legacy); also include the dot variant used in templates */
 .py-1_5 { padding-top: 0.375rem; padding-bottom: 0.375rem; }
+.py-1\.5 { padding-top: 0.375rem; padding-bottom: 0.375rem; }
+/* mt-0_5 is the underscore variant (legacy); also include the dot variant used in templates */
 .mt-0_5 { margin-top: 0.125rem; }
+.mt-0\.5 { margin-top: 0.125rem; }
 .w-9 { width: 2.25rem; }
 .h-9 { height: 2.25rem; }
 
@@ -207,11 +221,14 @@ input, select, button { font-size: 16px !important; }
     grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--item-card-min)), 1fr));
 }
 
-.bag-card { height: 100%; display: flex; flex-direction: column; }
-.bag-card ul { max-height: 400px; overflow-y: auto; }
+.bag-card { height: 100%; display: flex; flex-direction: column; box-sizing: border-box; padding-left: 1rem; padding-right: 1rem; }
+.bag-card ul { padding-left: 0; margin: 0; list-style: none; overflow: visible; }
 
-.family-grid { display: flex; flex-wrap: wrap; gap: var(--card-gap); align-items: flex-start; }
+.family-grid { display: flex; flex-wrap: wrap; gap: var(--card-gap); align-items: flex-start; box-sizing: border-box; padding-left: 1rem; padding-right: 1rem; }
 .family-column { flex: 1 1 100%; }
+/* Ensure column headers and bag-card content have symmetric horizontal padding */
+.family-column > h3 { padding-left: 1rem; padding-right: 1rem; box-sizing: border-box; }
+.family-column .desktop-grid-x { padding-left: 0; padding-right: 0; }
 .bag-title-area { min-height: 3.5rem; }
 
 /* Sidebar styles */
@@ -253,7 +270,7 @@ input, select, button { font-size: 16px !important; }
 }
 
 .bag-card { overflow: visible; }
-.bag-card > .sticky { box-shadow: 0 2px 4px -1px rgba(0,0,0,0.1); z-index: 15; }
+.bag-card > .sticky { box-shadow: none !important; z-index: 15; padding-top: 10px !important; padding-right: 0 !important; padding-bottom: 10px !important; padding-left: 0 !important; }
 
 #searchDropdown {
     z-index: 45;
@@ -278,8 +295,7 @@ input, select, button { font-size: 16px !important; }
 /* Hover effects */
 .hover\:bg-gray-100:hover { background-color: #f3f4f6; }
 .hover\:bg-blue-50:hover { background-color: #eff6ff; }
-.hover\:bg-blue-100:hover { background-color: #dbeafe; }
-.hover\:bg-blue-700:hover { background-color: #1d4ed8; }
+.hover\:bg-blue-100:hover { background-color: #dbeafe; }	.hover\:bg-blue-600:hover { background-color: #2563eb; }.hover\:bg-blue-700:hover { background-color: #1d4ed8; }
 .hover\:bg-green-600:hover { background-color: #16a34a; }
 .hover\:bg-green-700:hover { background-color: #15803d; }
 .hover\:bg-red-500:hover { background-color: #ef4444; }
