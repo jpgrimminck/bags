@@ -1,6 +1,6 @@
 import { state } from './state.js';
 import { render, updateHeaderCounter, updateBagProgress, updateSearchResults, updateHeaderStats } from './render.js';
-import { saveItemsTrips } from './data.js';
+import { saveItemsTrips, saveInventory } from './data.js';
 import { getItemsForBag, normalizePhotoPath, scrollToFamilyCreate } from './utils.js';
 import { AVAILABLE_LOCATIONS } from './constants.js';
 
@@ -96,6 +96,44 @@ export function toggleItem(id, bagId) {
             }
         }, 0);
     }
+}
+
+export function togglePendingItem(id) {
+    const index = state.pendingAssignItems.indexOf(id);
+    if (index > -1) {
+        state.pendingAssignItems.splice(index, 1);
+    } else {
+        state.pendingAssignItems.push(id);
+    }
+    render();
+}
+
+export function confirmPendingItems() {
+    const bagId = state.assignModeBagId;
+    state.pendingAssignItems.forEach(itemId => {
+        const item = state.inventory.find(i => i.id === itemId);
+        if (item) {
+            item.bag = bagId;
+            // Update itemsTrips
+            const tripItem = state.itemsTrips.find(it => it.itemId === itemId && it.tripId === state.currentTripId);
+            if (tripItem) {
+                tripItem.bagId = bagId;
+            } else {
+                // If not exists, create it
+                state.itemsTrips.push({
+                    itemId: itemId,
+                    tripId: state.currentTripId,
+                    bagId: bagId,
+                    checked: false
+                });
+            }
+        }
+    });
+    saveItemsTrips();
+    saveInventory();
+    state.pendingAssignItems = [];
+    // Redirect back to index.html
+    window.location.href = `index.html?viaje=${state.currentTripId}`;
 }
 
 export function toggleSearchItem(id) {
@@ -204,6 +242,7 @@ export function removeItemFromBag(itemId, bagId) {
         tripItem.checked = false;
     }
     saveItemsTrips();
+    saveInventory();
     
     const itemElement = document.querySelector(`[data-item-id="${itemId}"]`);
     if (itemElement) {
@@ -489,6 +528,7 @@ export function saveNewItems() {
         state.inventory.push(newItem);
     });
     
+    saveInventory();
     closeModal();
     render();
     
@@ -511,6 +551,10 @@ export function saveNewItems() {
 import * as data from './data.js';
 
 export async function clearLocalData() {
+    // Clear localStorage to remove saved changes
+    localStorage.removeItem('inventory');
+    localStorage.removeItem('itemsTrips');
+    
     // Reset in-memory state from JSON files (no localStorage usage)
     await data.loadFamily();
     await data.loadPets();
@@ -528,5 +572,13 @@ export async function clearLocalData() {
     state.assignModeBagId = null;
 
     render();
-    alert('Datos reiniciados desde los archivos JSON (sin persistencia).');
+    
+    // Show "JSON Original" message for 1 second
+    const message = document.createElement('div');
+    message.textContent = 'JSON Original';
+    message.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white text-xl font-bold px-4 py-2 rounded-lg z-50';
+    document.body.appendChild(message);
+    setTimeout(() => {
+        message.remove();
+    }, 1000);
 }

@@ -42,14 +42,31 @@ export async function loadBags() {
     }
 }
 
-// Cargar relaciones items-viajes desde items_trips.json (siempre desde el archivo, sin usar localStorage)
+// Cargar relaciones items-viajes desde items_trips.json y localStorage
 export async function loadItemsTrips() {
     try {
         const response = await fetch('JSON/items_trips.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        state.itemsTrips = await response.json();
+        let itemsTripsData = await response.json();
+        
+        // Load saved itemsTrips changes from localStorage
+        const savedItemsTrips = localStorage.getItem('itemsTrips');
+        if (savedItemsTrips) {
+            const savedData = JSON.parse(savedItemsTrips);
+            // Merge: update existing and add new
+            savedData.forEach(savedItem => {
+                const existingIndex = itemsTripsData.findIndex(item => item.itemId === savedItem.itemId && item.tripId === savedItem.tripId);
+                if (existingIndex >= 0) {
+                    itemsTripsData[existingIndex] = savedItem;
+                } else {
+                    itemsTripsData.push(savedItem);
+                }
+            });
+        }
+        
+        state.itemsTrips = itemsTripsData;
     } catch (e) {
         console.error("No se pudo cargar items_trips:", e);
         state.itemsTrips = [];
@@ -65,7 +82,21 @@ export async function loadInventory() {
         }
         let inventoryData = await response.json();
         
-        // Do not load new items from localStorage: new items are temporary in-memory only and disappear on reload
+        // Load saved inventory changes from localStorage
+        const savedInventory = localStorage.getItem('inventory');
+        if (savedInventory) {
+            const savedData = JSON.parse(savedInventory);
+            // Merge: update existing items and add new ones
+            savedData.forEach(savedItem => {
+                const existingIndex = inventoryData.findIndex(item => item.id === savedItem.id);
+                if (existingIndex >= 0) {
+                    inventoryData[existingIndex] = savedItem;
+                } else {
+                    inventoryData.push(savedItem);
+                }
+            });
+        }
+        
         state.newItems = [];
         state.inventory = [...inventoryData];
     } catch (e) {
@@ -114,10 +145,12 @@ export async function loadTripName() {
     }
 }
 
-// Save itemsTrips in memory only (do NOT persist to localStorage). This keeps data identical across devices
+// Save itemsTrips in localStorage to persist changes
 export function saveItemsTrips() {
-    // In-memory state already updated by callers; no persistence to localStorage.
-    // Keeping this function so existing calls (toggleItem, etc.) remain valid.
-    // Could optionally trigger analytics/logging here if desired.
-    return;
+    localStorage.setItem('itemsTrips', JSON.stringify(state.itemsTrips));
+}
+
+// Save inventory in localStorage to persist changes
+export function saveInventory() {
+    localStorage.setItem('inventory', JSON.stringify(state.inventory));
 }
