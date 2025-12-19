@@ -582,3 +582,87 @@ export async function clearLocalData() {
         message.remove();
     }, 1000);
 }
+
+// --- CREACIÓN DE ITEMS ---
+
+export function startCreateItem(familyName) {
+    state.creatingItemForOwner = familyName;
+    state.newItemText = '';
+    state.newItemMatches = [];
+    render();
+    setTimeout(() => {
+        const input = document.getElementById(`create-input-${familyName}`);
+        if (input) {
+            state.currentCreateInput = input;
+            input.focus();
+            input.setSelectionRange(state.newItemText.length, state.newItemText.length);
+            // Para móvil, forzar teclado si es necesario
+            if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                input.blur();
+                setTimeout(() => input.focus(), 10);
+            }
+        }
+    }, 100);
+}
+
+export function updateNewItemText(text) {
+    state.newItemText = text;
+    // Filtrar matches en segundo plano
+    setTimeout(() => {
+        const familyItems = state.inventory.filter(item => {
+            const ownerMember = state.familyMembers.find(m => m.id === item.owner);
+            return ownerMember && ownerMember.name === state.creatingItemForOwner;
+        });
+        state.newItemMatches = familyItems.filter(item => 
+            item.name.toLowerCase().includes(text.toLowerCase())
+        );
+        render();
+        // Mantener foco en el input
+        setTimeout(() => {
+            const input = document.getElementById(`create-input-${state.creatingItemForOwner}`);
+            if (input) {
+                input.focus();
+                input.setSelectionRange(text.length, text.length);
+            }
+        }, 0);
+    }, 0);
+}
+
+export function cancelCreateItem() {
+    state.creatingItemForOwner = null;
+    state.newItemText = '';
+    state.newItemMatches = [];
+    render();
+}
+
+export function createNewItem() {
+    if (!state.newItemText.trim()) return;
+    const ownerMember = state.familyMembers.find(m => m.name === state.creatingItemForOwner);
+    if (!ownerMember) return;
+    
+    const newItem = {
+        id: Date.now(),
+        name: state.newItemText.trim(),
+        owner: ownerMember.id,
+        category: 'otros',
+        loc: 'Casa',
+        checked: false,
+        icon: ''
+    };
+    
+    state.inventory.push(newItem);
+    state.inventory.sort((a, b) => a.name.localeCompare(b.name, 'es'));
+    
+    // Guardar en localStorage
+    saveInventory();
+    
+    // Marcar como nuevo para resaltar
+    state.newlyCreatedItem = newItem.id;
+    setTimeout(() => {
+        state.newlyCreatedItem = null;
+        render();
+    }, 1000);
+    
+    cancelCreateItem();
+    render();
+}

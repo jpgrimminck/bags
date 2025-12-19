@@ -55,6 +55,8 @@ export const state = {
   creatingItemForOwner: null, // nombre del familiar para el que se está creando item
   newItemText: '', // texto del nuevo item
   newItemMatches: [], // items que coinciden con el texto
+  newlyCreatedItem: null, // ID del item recién creado para resaltar
+  currentCreateInput: null, // referencia al input de creación actual
 
   // Nuevos items creados (temporal en memoria — no persistidos)
   newItems: [],

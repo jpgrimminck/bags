@@ -536,6 +536,8 @@ export function renderInventarioView(container) {
          
          const sortedItems = [...displayItems].sort((a, b) => a.name.localeCompare(b.name, 'es'));
          
+         const filteredItems = state.newItemText.trim() && state.creatingItemForOwner === familyName ? sortedItems.filter(item => state.newItemMatches.some(match => match.id === item.id)) : sortedItems;
+         
          // Crear tarjeta de creación
          let createCardHTML = '';
          if (!state.assignModeActive) {
@@ -587,10 +589,9 @@ export function renderInventarioView(container) {
              </div>
              ` : `
                  <div class="desktop-grid-x items-grid" onclick="${state.creatingItemForOwner === familyName ? `if(!event.target.closest('.create-item-card')) cancelCreateItem();` : ''}">
-                 ${sortedItems.map(item => {
+                 ${filteredItems.map(item => {
                      const isAssigned = assignedItemIds.includes(item.id);
                      const isFilterActive = state.tripFilterActive !== null || state.assignModeActive;
-                     const isHighlighted = state.creatingItemForOwner === familyName && state.newItemMatches.includes(item);
                      
                      // Determinar estilo y acción según modo
                      let cardBg, clickAction, cursorClass, rightIcon;
@@ -642,8 +643,8 @@ export function renderInventarioView(container) {
                          cursorClass = '';
                      }
                      
-                     if (isHighlighted) {
-                         cardBg = 'bg-yellow-200 border-2 border-yellow-400';
+                     if (item.id === state.newlyCreatedItem) {
+                         cardBg = 'bg-blue-200 border-2 border-blue-400';
                      }
                      
                      const textColor = (state.assignModeActive && state.pendingAssignItems.includes(item.id)) || (state.tripFilterActive === 1 && state.selectedItemsForTrip.includes(item.id)) ? 'text-white' : 'text-gray-800';

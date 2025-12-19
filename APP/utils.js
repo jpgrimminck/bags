@@ -111,3 +111,7 @@ export function getBagAssignment(bagId) {
         icons: owners.map(o => o.icon).join(' ')
     };
 }
+
+export function isMobile() {
+    return window.innerWidth < 768 || /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
