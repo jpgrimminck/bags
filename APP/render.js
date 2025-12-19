@@ -118,7 +118,7 @@ export function renderBagsContent() {
             
             if (padreCount >= 2) {
                 // 2+ padres = "PAPÁS"
-                titleParts.push('PAPÁS');
+                titleParts.push('LOS PAPÁS');
             } else if (padreCount === 1) {
                 // 1 padre = nombre individual
                 titleParts.push(padres[0].name.toUpperCase());
@@ -126,7 +126,7 @@ export function renderBagsContent() {
             
             if (hijoCount >= 2) {
                 // 2+ hijos = "HERMANOS"
-                titleParts.push('HERMANOS');
+                titleParts.push('LOS HERMANOS');
             } else if (hijoCount === 1) {
                 // 1 hijo = nombre individual
                 titleParts.push(hijos[0].name.toUpperCase());
@@ -135,7 +135,7 @@ export function renderBagsContent() {
             // Construir el título final
             if (titleParts.length === 1) {
                 sectionTitle = bagCount === 1 ? `BOLSO DE ${titleParts[0]}` : `BOLSOS DE ${titleParts[0]}`;
-            } else if (titleParts[0] === 'PAPÁS' && titleParts[1] === 'HERMANOS') {
+            } else if (titleParts[0] === 'LOS PAPÁS' && titleParts[1] === 'LOS HERMANOS') {
                 // Caso especial: todos (papás + hermanos)
                 sectionTitle = bagCount === 1 ? 'BOLSO FAMILIAR' : 'BOLSOS FAMILIARES';
             } else {
