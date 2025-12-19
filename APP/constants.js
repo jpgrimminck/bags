@@ -1,6 +1,6 @@
 // Shared constants for the app
 export const CARD_GAP = '1rem';
-export const DEFAULT_BAG_IMAGE = 'bag-default.jpg';
+export const DEFAULT_BAG_IMAGE = 'images/bags/b1.jpeg';
 export const ANIMATION_HIGHLIGHT_MS = 1800;
 
 export const AVAILABLE_LOCATIONS = [

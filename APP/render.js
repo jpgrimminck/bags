@@ -1,6 +1,6 @@
 import { state } from './state.js';
 import { getItemsForBag, getBagAssignment, applyInlineCardGapIfNeeded } from './utils.js';
-import { ITEM_CATEGORIES } from './constants.js';
+import { ITEM_CATEGORIES, DEFAULT_BAG_IMAGE } from './constants.js';
 
 // --- LÓGICA DE RENDERIZADO ---
 
@@ -188,7 +188,7 @@ export function renderBagsContent() {
                     <!-- Título e ícono -->
                     <div class="flex justify-between items-center mb-2 bag-title-area">
                         <div class="flex items-center">
-                            <img src="${bag.photo || 'bag-default.jpg'}" alt="${bag.name}" class="w-12 h-12 w-14 h-14 rounded-lg object-cover mr-3">
+                            <img src="${bag.photo || DEFAULT_BAG_IMAGE}" alt="${bag.name}" onerror="this.src='${DEFAULT_BAG_IMAGE}'; this.onerror=null" class="w-12 h-12 w-14 h-14 rounded-lg object-cover mr-3">
                             <div>
                                 ${isEditingName ? `
                                 <input type="text" id="edit-bag-name-input" value="${bag.name}" 
@@ -712,7 +712,7 @@ export function renderInventarioView(container) {
         headerHTML = `
          <div class="sticky top-[52px] z-30 bg-blue-600 text-white py-3 -mx-4 px-4 mb-4 rounded-lg shadow-lg">
              <div class="flex items-center gap-3">
-                 <img src="${assignModeBag.photo || 'bag-default.jpg'}" class="w-10 h-10 rounded-lg object-cover">
+                 <img src="${assignModeBag.photo || DEFAULT_BAG_IMAGE}" onerror="this.src='${DEFAULT_BAG_IMAGE}'; this.onerror=null" class="w-10 h-10 rounded-lg object-cover">
                  <div class="flex-1">
                      <p class="font-bold text-lg flex items-center gap-2">${headerText} ${ownersIconsHTML}</p>
                  </div>
@@ -917,7 +917,7 @@ export function renderConfigView(container) {
                     <div class="border rounded-lg p-4 hover:shadow-md transition-shadow bg-gray-50">
                         <div class="flex justify-between items-start mb-2">
                             <div class="flex items-center gap-2">
-                                <img src="${bag.photo || 'bag-default.jpg'}" alt="${bag.name}" class="w-10 h-10 rounded-lg object-cover">
+                                <img src="${bag.photo || DEFAULT_BAG_IMAGE}" alt="${bag.name}" onerror="this.src='${DEFAULT_BAG_IMAGE}'; this.onerror=null" class="w-10 h-10 rounded-lg object-cover">
                                 <div>
                                     <h4 class="font-bold text-gray-900">${bag.name}</h4>
                                     <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded">${bag.type || 'bolso'}</span>

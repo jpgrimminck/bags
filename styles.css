@@ -308,8 +308,9 @@ input, select, button { font-size: 16px !important; }
 .hover\:shadow-md:hover { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
 .hover\:shadow-lg:hover { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
 
-/* Active effects */
-.active\:bg-blue-700:active { background-color: #1d4ed8; }
+/* Buttons inside bag cards should not have underlines */
+.bag-card a, .bag-card a i { text-decoration: none !important; }
+.bag-card a:hover, .bag-card a:focus { text-decoration: none !important; }
 .active\:bg-green-700:active { background-color: #15803d; }
 .active\:bg-red-600:active { background-color: #dc2626; }
 .active\:bg-purple-700:active { background-color: #7e22ce; }
