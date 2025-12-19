@@ -111,7 +111,20 @@ export async function loadTripName() {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const viajes = await response.json();
+        let viajes = await response.json();
+        
+        // Load saved trips from localStorage
+        const savedTrips = localStorage.getItem('viajes');
+        if (savedTrips) {
+            const savedData = JSON.parse(savedTrips);
+            // Merge: add new trips
+            savedData.forEach(savedTrip => {
+                if (!viajes.find(v => v.id === savedTrip.id)) {
+                    viajes.push(savedTrip);
+                }
+            });
+        }
+        
         // Guardar todos los viajes
         state.allTrips = viajes;
         

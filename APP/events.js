@@ -554,6 +554,7 @@ export async function clearLocalData() {
     // Clear localStorage to remove saved changes
     localStorage.removeItem('inventory');
     localStorage.removeItem('itemsTrips');
+    localStorage.removeItem('viajes'); // Remove saved trips so newly created trips are cleared
     
     // Reset in-memory state from JSON files (no localStorage usage)
     await data.loadFamily();
@@ -581,6 +582,36 @@ export async function clearLocalData() {
     setTimeout(() => {
         message.remove();
     }, 1000);
+}
+
+export async function deleteLastTrip() {
+    // Remove only the last trip saved in localStorage
+    const savedTrips = JSON.parse(localStorage.getItem('viajes') || '[]');
+    if (!savedTrips || savedTrips.length === 0) {
+        const msg = document.createElement('div');
+        msg.textContent = 'No hay viajes guardados';
+        msg.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white text-lg font-bold px-4 py-2 rounded-lg z-50';
+        document.body.appendChild(msg);
+        setTimeout(() => msg.remove(), 1000);
+        return;
+    }
+
+    const removed = savedTrips.pop();
+    localStorage.setItem('viajes', JSON.stringify(savedTrips));
+
+    // Remove any itemsTrips associated to that trip
+    const itemsTrips = JSON.parse(localStorage.getItem('itemsTrips') || '[]').filter(it => it.tripId !== removed.id);
+    localStorage.setItem('itemsTrips', JSON.stringify(itemsTrips));
+
+    const msg = document.createElement('div');
+    msg.textContent = 'Viaje eliminado';
+    msg.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white text-lg font-bold px-4 py-2 rounded-lg z-50';
+    document.body.appendChild(msg);
+    setTimeout(() => {
+        msg.remove();
+        // Reload to update UI
+        window.location.reload();
+    }, 800);
 }
 
 // --- CREACIÓN DE ITEMS ---
