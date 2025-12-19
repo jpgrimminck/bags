@@ -7,7 +7,11 @@ import { ITEM_CATEGORIES, DEFAULT_BAG_IMAGE } from './constants.js';
 export function render() {
     const app = document.getElementById('app');
     if (!app) return;
-    app.innerHTML = '';
+    
+    // Skip clearing for viajes page as it has static content
+    if (state.currentTab !== 'viajes') {
+        app.innerHTML = '';
+    }
     
     // Actualizar estadísticas del header
     updateHeaderStats();
