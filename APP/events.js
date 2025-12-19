@@ -508,6 +508,25 @@ export function saveNewItems() {
     }
 }
 
-export function clearLocalData() {
-    alert('No se usa localStorage. Los datos se cargan desde los archivos JSON.');
+import * as data from './data.js';
+
+export async function clearLocalData() {
+    // Reset in-memory state from JSON files (no localStorage usage)
+    await data.loadFamily();
+    await data.loadPets();
+    await data.loadBags();
+    await data.loadItemsTrips();
+    await data.loadInventory();
+    await data.loadTripName();
+    // Reset transient UI state
+    state.newItems = [];
+    state.openBagMenu = null;
+    state.editingBags = {};
+    state.editingBagName = null;
+    state.removingFromBag = {};
+    state.assignModeActive = false;
+    state.assignModeBagId = null;
+
+    render();
+    alert('Datos reiniciados desde los archivos JSON (sin persistencia).');
 }

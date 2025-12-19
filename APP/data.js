@@ -42,22 +42,17 @@ export async function loadBags() {
     }
 }
 
-// Cargar relaciones items-viajes desde items_trips.json o localStorage
+// Cargar relaciones items-viajes desde items_trips.json (siempre desde el archivo, sin usar localStorage)
 export async function loadItemsTrips() {
-    const stored = localStorage.getItem('itemsTrips');
-    if (stored) {
-        state.itemsTrips = JSON.parse(stored);
-    } else {
-        try {
-            const response = await fetch('JSON/items_trips.json');
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            state.itemsTrips = await response.json();
-        } catch (e) {
-            console.error("No se pudo cargar items_trips:", e);
-            state.itemsTrips = [];
+    try {
+        const response = await fetch('JSON/items_trips.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
+        state.itemsTrips = await response.json();
+    } catch (e) {
+        console.error("No se pudo cargar items_trips:", e);
+        state.itemsTrips = [];
     }
 }
 
@@ -70,9 +65,9 @@ export async function loadInventory() {
         }
         let inventoryData = await response.json();
         
-        // Cargar nuevos items desde localStorage y fusionarlos
-        state.newItems = JSON.parse(localStorage.getItem('newItems') || '[]');
-        state.inventory = [...inventoryData, ...state.newItems];
+        // Do not load new items from localStorage: new items are temporary in-memory only and disappear on reload
+        state.newItems = [];
+        state.inventory = [...inventoryData];
     } catch (e) {
         console.error("No se pudo cargar el inventario:", e);
     }
@@ -119,7 +114,10 @@ export async function loadTripName() {
     }
 }
 
-// Función para guardar itemsTrips en localStorage
+// Save itemsTrips in memory only (do NOT persist to localStorage). This keeps data identical across devices
 export function saveItemsTrips() {
-    localStorage.setItem('itemsTrips', JSON.stringify(state.itemsTrips));
+    // In-memory state already updated by callers; no persistence to localStorage.
+    // Keeping this function so existing calls (toggleItem, etc.) remain valid.
+    // Could optionally trigger analytics/logging here if desired.
+    return;
 }

@@ -56,7 +56,7 @@ export const state = {
   newItemText: '', // texto del nuevo item
   newItemMatches: [], // items que coinciden con el texto
 
-  // Nuevos items creados (persistidos en localStorage)
+  // Nuevos items creados (temporal en memoria — no persistidos)
   newItems: [],
 
   // Espacio centralizado para el gap entre tarjetas
