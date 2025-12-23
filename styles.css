@@ -67,6 +67,8 @@ body {
 
 /* Override: remove internal padding on #app even if .p-4 is applied, layout expects edge-to-edge columns */
 #app.p-4 { padding: 0 !important; }
+.viajes-cta { position: fixed; left: 1rem; right: 1rem; bottom: 1rem; z-index: 45; width: calc(100% - 2rem); }
+.viajes-cta-spacer { padding-bottom: 7rem; }
 .w-6 { width: 1.5rem; }
 .h-6 { height: 1.5rem; }
 .w-8 { width: 2rem; }
