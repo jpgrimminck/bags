@@ -99,6 +99,8 @@ Este documento describe la app como un negocio con procesos, sin detalles tecnic
   - Cada paso debe mostrar un resumen de lo ya seleccionado (nombre, familiares, bolsos).
   - Cada paso debe tener flecha de volver atras.
   - Si el nombre termina con punto o espacio, se elimina ese caracter al guardar.
+  - Cuando haya 2 botones en un paso, deben ir en la misma fila: el principal a la derecha con 2/3 del ancho y el secundario "Atrás" a la izquierda con 1/3, estilo secundario (borde azul y texto negro).
+  - En el paso final, "Crear viaje" debe usar el mismo estilo visual que el botón principal de pasos anteriores (azul y lleno) y ubicarse a la derecha, con "Atrás" a la izquierda.
 
 ### Pantalla: Viaje actual (`index.html`)
 - Objetivo: operar el viaje ya creado.
