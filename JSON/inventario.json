@@ -4,7 +4,6 @@
         "name": "Otros zapatos",
         "owner": 3,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -13,7 +12,6 @@
         "name": "Botella",
         "owner": 3,
         "loc": "Cocina",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -22,7 +20,6 @@
         "name": "Babero",
         "owner": 3,
         "loc": "Cocina",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -30,8 +27,7 @@
         "id": 4,
         "name": "Colonia",
         "owner": 3,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -40,7 +36,6 @@
         "name": "Impermeable",
         "owner": 3,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "abrigo"
     },
@@ -49,7 +44,6 @@
         "name": "Tenidas (3)",
         "owner": 3,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -58,7 +52,6 @@
         "name": "Pijamas",
         "owner": 3,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -67,7 +60,6 @@
         "name": "Calcetines",
         "owner": 3,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -76,7 +68,6 @@
         "name": "Zapatos",
         "owner": 3,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -85,7 +76,6 @@
         "name": "Chalitas",
         "owner": 3,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -94,7 +84,6 @@
         "name": "Tutos",
         "owner": 3,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -103,7 +92,6 @@
         "name": "Chalecos",
         "owner": 3,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "abrigo"
     },
@@ -112,7 +100,6 @@
         "name": "Cortavientos",
         "owner": 3,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "abrigo"
     },
@@ -121,16 +108,14 @@
         "name": "Gorrito sol",
         "owner": 3,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "abrigo"
     },
     {
         "id": 15,
-        "name": "Gorrito frío",
+        "name": "Gorrito fr\u00edo",
         "owner": 3,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "abrigo"
     },
@@ -139,7 +124,6 @@
         "name": "Abrigo",
         "owner": 3,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "abrigo"
     },
@@ -148,7 +132,6 @@
         "name": "Pantuflas",
         "owner": 3,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -157,34 +140,30 @@
         "name": "Gorro sol",
         "owner": 4,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "abrigo"
     },
     {
         "id": 19,
-        "name": "Pañales",
+        "name": "Pa\u00f1ales",
         "owner": 4,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
     {
         "id": 20,
-        "name": "Pañal agua",
+        "name": "Pa\u00f1al agua",
         "owner": 4,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
     {
         "id": 21,
-        "name": "Traje baño",
+        "name": "Traje ba\u00f1o",
         "owner": 4,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -193,7 +172,6 @@
         "name": "Ropa",
         "owner": 4,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -202,7 +180,6 @@
         "name": "Gorros",
         "owner": 4,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "abrigo"
     },
@@ -211,7 +188,6 @@
         "name": "Abrigo",
         "owner": 4,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "abrigo"
     },
@@ -220,7 +196,6 @@
         "name": "Pijama",
         "owner": 4,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -228,8 +203,7 @@
         "id": 26,
         "name": "Bloqueador",
         "owner": 4,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -237,17 +211,15 @@
         "id": 27,
         "name": "Escobilla",
         "owner": 4,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
     {
         "id": 28,
-        "name": "Jabón",
+        "name": "Jab\u00f3n",
         "owner": 4,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -255,17 +227,15 @@
         "id": 29,
         "name": "Hipoglos",
         "owner": 4,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
     {
         "id": 30,
-        "name": "Toallitas bebé",
+        "name": "Toallitas beb\u00e9",
         "owner": 4,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -273,8 +243,7 @@
         "id": 31,
         "name": "Vitaminas",
         "owner": 4,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -282,26 +251,23 @@
         "id": 32,
         "name": "Paracetamol infantil",
         "owner": 4,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
     {
         "id": 33,
-        "name": "Termómetro",
+        "name": "Term\u00f3metro",
         "owner": 4,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "electronica"
     },
     {
         "id": 34,
-        "name": "Tijeritas bebé",
+        "name": "Tijeritas beb\u00e9",
         "owner": 4,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -309,8 +275,7 @@
         "id": 35,
         "name": "Saca mocos",
         "owner": 4,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "otros"
     },
@@ -319,7 +284,6 @@
         "name": "Chupete",
         "owner": 4,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -328,7 +292,6 @@
         "name": "Mamaderas",
         "owner": 4,
         "loc": "Cocina",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -337,7 +300,6 @@
         "name": "Colados",
         "owner": 4,
         "loc": "Cocina",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -346,7 +308,6 @@
         "name": "Galletas arroz",
         "owner": 4,
         "loc": "Cocina",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -355,7 +316,6 @@
         "name": "Luz nocturna",
         "owner": 4,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "electronica"
     },
@@ -364,7 +324,6 @@
         "name": "Ruido blanco",
         "owner": 4,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "electronica"
     },
@@ -373,7 +332,6 @@
         "name": "Gimnasio",
         "owner": 4,
         "loc": "Living/Estar",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -382,7 +340,6 @@
         "name": "Pianito",
         "owner": 4,
         "loc": "Living/Estar",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -391,7 +348,6 @@
         "name": "Mochilita",
         "owner": 4,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -399,8 +355,7 @@
         "id": 45,
         "name": "Toalla playa",
         "owner": 4,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -409,7 +364,6 @@
         "name": "Balde playa",
         "owner": 4,
         "loc": "Living/Estar",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -418,7 +372,6 @@
         "name": "Tenidas (3)",
         "owner": 4,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -427,7 +380,6 @@
         "name": "Calcetines",
         "owner": 4,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -436,7 +388,6 @@
         "name": "Chalitas",
         "owner": 4,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -445,7 +396,6 @@
         "name": "Tutos",
         "owner": 4,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -454,7 +404,6 @@
         "name": "Chalecos",
         "owner": 4,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "abrigo"
     },
@@ -463,16 +412,14 @@
         "name": "Cortavientos",
         "owner": 4,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "abrigo"
     },
     {
         "id": 53,
-        "name": "Gorrito frío",
+        "name": "Gorrito fr\u00edo",
         "owner": 4,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "abrigo"
     },
@@ -481,7 +428,6 @@
         "name": "Pantuflas",
         "owner": 4,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -489,8 +435,7 @@
         "id": 55,
         "name": "Paracetamol adultos",
         "owner": 2,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -498,8 +443,7 @@
         "id": 56,
         "name": "Crema Eucerin",
         "owner": 2,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -507,8 +451,7 @@
         "id": 57,
         "name": "Remedios (5)",
         "owner": 2,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -516,8 +459,7 @@
         "id": 58,
         "name": "Placa",
         "owner": 2,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -525,8 +467,7 @@
         "id": 59,
         "name": "Sertac",
         "owner": 2,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -535,18 +476,16 @@
         "name": "Gotitas",
         "description": "Para los ojos, envase azul",
         "owner": 2,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
     {
         "id": 61,
         "name": "Lubricante",
-        "description": "Lubricante íntimo",
+        "description": "Lubricante \u00edntimo",
         "owner": 2,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -555,17 +494,15 @@
         "name": "Bloqueador sol",
         "description": "FPS 50+, resistente al agua",
         "owner": 2,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
     {
         "id": 63,
-        "name": "Crema estrías",
+        "name": "Crema estr\u00edas",
         "owner": 2,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -574,16 +511,14 @@
         "name": "Jeans maternales",
         "owner": 2,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
     {
         "id": 65,
-        "name": "Traje baño",
+        "name": "Traje ba\u00f1o",
         "owner": 2,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -592,7 +527,6 @@
         "name": "Ropa interior",
         "owner": 2,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -601,7 +535,6 @@
         "name": "Chalas",
         "owner": 2,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -610,7 +543,6 @@
         "name": "Zapatillas",
         "owner": 2,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -619,7 +551,6 @@
         "name": "Poleras",
         "owner": 2,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -628,7 +559,6 @@
         "name": "Short",
         "owner": 2,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -637,7 +567,6 @@
         "name": "Calcetines",
         "owner": 2,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -646,7 +575,6 @@
         "name": "Pantalones",
         "owner": 2,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -655,7 +583,6 @@
         "name": "Chaleco",
         "owner": 2,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "abrigo"
     },
@@ -664,7 +591,6 @@
         "name": "Abrigo",
         "owner": 2,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "abrigo"
     },
@@ -673,7 +599,6 @@
         "name": "Pijama",
         "owner": 2,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -681,8 +606,7 @@
         "id": 76,
         "name": "Neceser",
         "owner": 2,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -691,7 +615,6 @@
         "name": "Jockey",
         "owner": 2,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "abrigo"
     },
@@ -700,7 +623,6 @@
         "name": "Anteojos sol",
         "owner": 2,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -709,25 +631,22 @@
         "name": "Ropa deporte",
         "owner": 2,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
     {
         "id": 80,
-        "name": "Perfume mío",
+        "name": "Perfume m\u00edo",
         "owner": 2,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
     {
         "id": 81,
-        "name": "Shampoo y bálsamo",
+        "name": "Shampoo y b\u00e1lsamo",
         "owner": 2,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -735,8 +654,7 @@
         "id": 82,
         "name": "Secador pelo",
         "owner": 2,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "electronica"
     },
@@ -744,8 +662,7 @@
         "id": 83,
         "name": "Mascarilla",
         "owner": 2,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -754,7 +671,6 @@
         "name": "Ropa cambio",
         "owner": 2,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -763,7 +679,6 @@
         "name": "Cargadores",
         "owner": 2,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "electronica"
     },
@@ -771,26 +686,23 @@
         "id": 86,
         "name": "Tijerita",
         "owner": 2,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
     {
         "id": 87,
-        "name": "Cortaúñas",
+        "name": "Corta\u00fa\u00f1as",
         "owner": 2,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
     {
         "id": 88,
-        "name": "Toallas baño",
+        "name": "Toallas ba\u00f1o",
         "owner": 2,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -798,17 +710,15 @@
         "id": 89,
         "name": "Toallas piscina",
         "owner": 2,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
     {
         "id": 90,
-        "name": "Sábanas 1 plaza",
+        "name": "S\u00e1banas 1 plaza",
         "owner": 2,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -816,8 +726,7 @@
         "id": 91,
         "name": "Gillette",
         "owner": 1,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -825,17 +734,15 @@
         "id": 92,
         "name": "Aceite/crema pelo",
         "owner": 1,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
     {
         "id": 93,
-        "name": "Shampoo y bálsamo",
+        "name": "Shampoo y b\u00e1lsamo",
         "owner": 1,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -843,8 +750,7 @@
         "id": 94,
         "name": "Neceser",
         "owner": 1,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -853,7 +759,6 @@
         "name": "Jockey",
         "owner": 1,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "abrigo"
     },
@@ -862,7 +767,6 @@
         "name": "Anteojos sol",
         "owner": 1,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -871,7 +775,6 @@
         "name": "Ropa cambio",
         "owner": 1,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -880,7 +783,6 @@
         "name": "Pijama",
         "owner": 1,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -889,16 +791,14 @@
         "name": "Cargadores",
         "owner": 1,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "electronica"
     },
     {
         "id": 100,
-        "name": "Cortaúñas",
+        "name": "Corta\u00fa\u00f1as",
         "owner": 1,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -907,7 +807,6 @@
         "name": "Chalitas",
         "owner": 1,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -915,8 +814,7 @@
         "id": 102,
         "name": "Placa",
         "owner": 1,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -924,8 +822,7 @@
         "id": 103,
         "name": "Sertac",
         "owner": 1,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -933,8 +830,7 @@
         "id": 104,
         "name": "Gotitas",
         "owner": 1,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -942,8 +838,7 @@
         "id": 105,
         "name": "Lubricante",
         "owner": 1,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -951,8 +846,7 @@
         "id": 106,
         "name": "Paracetamol",
         "owner": 1,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -961,16 +855,14 @@
         "name": "Silla clack",
         "owner": 5,
         "loc": "Living/Estar",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
     {
         "id": 108,
-        "name": "Cojín lactancia",
+        "name": "Coj\u00edn lactancia",
         "owner": 5,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -979,7 +871,6 @@
         "name": "Nidito",
         "owner": 5,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -988,7 +879,6 @@
         "name": "Baranda cama",
         "owner": 5,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -997,7 +887,6 @@
         "name": "Mochila porteo",
         "owner": 5,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1006,7 +895,6 @@
         "name": "Coche y adaptadores",
         "owner": 5,
         "loc": "Living/Estar",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1015,7 +903,6 @@
         "name": "Carrito con toldo",
         "owner": 5,
         "loc": "Living/Estar",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1024,7 +911,6 @@
         "name": "Manta picnic",
         "owner": 5,
         "loc": "Living/Estar",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1032,8 +918,7 @@
         "id": 115,
         "name": "Toallas playa",
         "owner": 5,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -1042,7 +927,6 @@
         "name": "Quitasoles",
         "owner": 5,
         "loc": "Living/Estar",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1051,7 +935,6 @@
         "name": "Volantin",
         "owner": 5,
         "loc": "Living/Estar",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1060,7 +943,6 @@
         "name": "Palo selfie",
         "owner": 5,
         "loc": "Living/Estar",
-        "checked": false,
         "icon": "",
         "category": "electronica"
     },
@@ -1068,8 +950,7 @@
         "id": 119,
         "name": "Toallitas desinfectantes",
         "owner": 5,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -1077,8 +958,7 @@
         "id": 120,
         "name": "Alcohol gel",
         "owner": 5,
-        "loc": "Baño",
-        "checked": false,
+        "loc": "Ba\u00f1o",
         "icon": "",
         "category": "aseo"
     },
@@ -1087,7 +967,6 @@
         "name": "Bolsa ropa sucia",
         "owner": 5,
         "loc": "Dormitorio",
-        "checked": false,
         "icon": "",
         "category": "ropa"
     },
@@ -1096,7 +975,6 @@
         "name": "Juegos de mesa",
         "owner": 5,
         "loc": "Living/Estar",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1105,7 +983,6 @@
         "name": "Juguetes playa",
         "owner": 5,
         "loc": "Living/Estar",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1114,16 +991,14 @@
         "name": "Scotch/Masking tape",
         "owner": 5,
         "loc": "Living/Estar",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
     {
         "id": 125,
-        "name": "Plumón/lápiz",
+        "name": "Plum\u00f3n/l\u00e1piz",
         "owner": 5,
         "loc": "Living/Estar",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1132,7 +1007,6 @@
         "name": "Cuaderno",
         "owner": 5,
         "loc": "Living/Estar",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1141,7 +1015,6 @@
         "name": "Caja comida",
         "owner": 5,
         "loc": "Cocina",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1150,7 +1023,6 @@
         "name": "Cooler",
         "owner": 5,
         "loc": "Cocina",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1159,7 +1031,6 @@
         "name": "Avena",
         "owner": 5,
         "loc": "Cocina",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1168,7 +1039,6 @@
         "name": "Snacks",
         "owner": 5,
         "loc": "Cocina",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1177,16 +1047,14 @@
         "name": "Bicarbonato",
         "owner": 5,
         "loc": "Cocina",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
     {
         "id": 132,
-        "name": "Café descafeinado",
+        "name": "Caf\u00e9 descafeinado",
         "owner": 5,
         "loc": "Cocina",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1195,7 +1063,6 @@
         "name": "Crackelets",
         "owner": 5,
         "loc": "Cocina",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1204,7 +1071,6 @@
         "name": "Almendras bolsita",
         "owner": 5,
         "loc": "Cocina",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1213,7 +1079,6 @@
         "name": "Botella agua",
         "owner": 5,
         "loc": "Cocina",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1222,7 +1087,6 @@
         "name": "Leche semidescremada",
         "owner": 5,
         "loc": "Comprar",
-        "checked": false,
         "icon": "",
         "category": "aseo"
     },
@@ -1231,7 +1095,6 @@
         "name": "Leche sin lactosa",
         "owner": 5,
         "loc": "Comprar",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1240,7 +1103,6 @@
         "name": "Compras Lider",
         "owner": 5,
         "loc": "Comprar",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1249,7 +1111,6 @@
         "name": "Queque",
         "owner": 5,
         "loc": "Comprar",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1258,7 +1119,6 @@
         "name": "Aceitunas",
         "owner": 5,
         "loc": "Comprar",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1267,7 +1127,6 @@
         "name": "Pickles",
         "owner": 5,
         "loc": "Comprar",
-        "checked": false,
         "icon": "",
         "category": "otros"
     },
@@ -1276,7 +1135,6 @@
         "name": "Queso crema",
         "owner": 5,
         "loc": "Comprar",
-        "checked": false,
         "icon": "",
         "category": "aseo"
     }

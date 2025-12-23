@@ -53,22 +53,30 @@ export function toggleItem(id, bagId) {
     if (!item) return;
     
     const effectiveBagId = bagId !== undefined ? bagId : null;
+    const bagIdNum = effectiveBagId !== null && effectiveBagId !== 'null' ? parseInt(effectiveBagId, 10) : null;
     
-    if (effectiveBagId && state.lockedBags[effectiveBagId]) {
+    if (bagIdNum !== null && state.lockedBags[bagIdNum]) {
         return;
     }
     
     // Actualizar el estado en itemsTrips
-    const tripItem = state.itemsTrips.find(it => it.itemId === id && it.tripId === state.currentTripId);
+    let tripItem = state.itemsTrips.find(it => it.itemId === id && it.tripId === state.currentTripId);
     if (tripItem) {
         tripItem.checked = !tripItem.checked;
+    } else if (bagIdNum !== null) {
+        tripItem = {
+            itemId: id,
+            tripId: state.currentTripId,
+            bagId: bagIdNum,
+            checked: true
+        };
+        state.itemsTrips.push(tripItem);
+    } else {
+        return;
     }
     saveItemsTrips();
     
-    const newChecked = tripItem ? tripItem.checked : !item.checked;
-    
-    // Actualizar item.checked
-    item.checked = newChecked;
+    const newChecked = tripItem.checked;
     
     const itemElement = document.querySelector(`[data-item-id="${id}"]`);
     if (itemElement) {
@@ -82,7 +90,7 @@ export function toggleItem(id, bagId) {
             checkbox.innerHTML = newChecked ? '<i class="fa-solid fa-check text-white text-xs"></i>' : '';
         }
         updateHeaderCounter();
-        if (effectiveBagId) updateBagProgress(effectiveBagId);
+        if (bagIdNum !== null) updateBagProgress(bagIdNum);
     } else {
         render();
     }
@@ -137,12 +145,12 @@ export function confirmPendingItems() {
 }
 
 export function toggleSearchItem(id) {
-    const item = state.inventory.find(i => i.id === id);
-    if (item) {
-        item.checked = !item.checked;
-        updateHeaderStats();
-        updateSearchResults(state.searchTerm);
-    }
+    const tripItem = state.itemsTrips.find(it => it.itemId === id && it.tripId === state.currentTripId);
+    if (!tripItem) return;
+    tripItem.checked = !tripItem.checked;
+    saveItemsTrips();
+    updateHeaderStats();
+    updateSearchResults(state.searchTerm);
 }
 
 export function toggleBagExpand(bagId) {
@@ -233,7 +241,6 @@ export function removeItemFromBag(itemId, bagId) {
     }
     
     item.bag = null;
-    item.checked = false;
     
     // Actualizar itemsTrips
     const tripItem = state.itemsTrips.find(it => it.itemId === itemId && it.tripId === state.currentTripId);
@@ -521,7 +528,6 @@ export function saveNewItems() {
             category: 'otros',
             bag: bagId,
             loc: loc,
-            checked: false,
             icon: "",
             temperature: temp
         };
@@ -677,7 +683,6 @@ export function createNewItem() {
         owner: ownerMember.id,
         category: 'otros',
         loc: 'Casa',
-        checked: false,
         icon: ''
     };
     

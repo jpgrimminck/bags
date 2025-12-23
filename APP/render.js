@@ -380,7 +380,14 @@ export function renderZonasView(container) {
             <p class="text-sm text-gray-500">Recorre la casa una sola vez.</p>
         </div>`;
 
-    const locations = [...new Set(state.inventory.map(i => i.loc))].sort();
+    const tripRelations = state.itemsTrips.filter(it => it.tripId === state.currentTripId);
+    const tripItems = tripRelations.map(rel => {
+        const item = state.inventory.find(i => i.id === rel.itemId);
+        if (!item) return null;
+        return { ...item, checked: rel.checked, bag: rel.bagId };
+    }).filter(i => i);
+
+    const locations = [...new Set(tripItems.map(i => i.loc))].sort();
 
     if(locations.includes('Comprar')) {
         locations.splice(locations.indexOf('Comprar'), 1);
@@ -390,7 +397,7 @@ export function renderZonasView(container) {
     let gridHTML = '<div class="desktop-grid-x">';
 
     locations.forEach(loc => {
-        const locItems = state.inventory.filter(i => i.loc === loc);
+        const locItems = tripItems.filter(i => i.loc === loc);
         const allChecked = locItems.length > 0 && locItems.every(i => i.checked);
         const checkedCount = locItems.filter(i => i.checked).length;
         const locColor = loc === 'Comprar' ? 'text-red-600' : 'text-gray-800';
@@ -1154,7 +1161,13 @@ export function updateSearchResults(value) {
     }
     
     if (value.length > 0) {
-        const searchResults = state.inventory.filter(item => 
+        const tripRelations = state.itemsTrips.filter(it => it.tripId === state.currentTripId);
+        const tripItems = tripRelations.map(rel => {
+            const item = state.inventory.find(i => i.id === rel.itemId);
+            if (!item) return null;
+            return { ...item, checked: rel.checked, bag: rel.bagId };
+        }).filter(i => i);
+        const searchResults = tripItems.filter(item => 
             item.name.toLowerCase().includes(value.toLowerCase())
         );
         
