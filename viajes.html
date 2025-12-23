@@ -286,6 +286,9 @@
         let selectedBags = [];
         let bagAssignments = {}; // itemId: bagId
         let wizardTripsCache = null;
+        let wizardFamilyCache = null;
+        let wizardBagsCache = null;
+        let wizardItemsCache = null;
         
         // Abrir modal del wizard
         function openNuevoViajeModal() {
@@ -295,6 +298,9 @@
             selectedBags = [];
             bagAssignments = {};
             wizardTripsCache = null;
+            wizardFamilyCache = null;
+            wizardBagsCache = null;
+            wizardItemsCache = null;
             renderWizardStep();
             document.getElementById('modal-nuevo-viaje').classList.remove('hidden');
         }
@@ -321,7 +327,7 @@
                     <button onclick="nextWizardStep()" class="w-full bg-blue-600 text-white rounded-lg py-4 px-6 font-bold text-lg shadow-lg hover:bg-blue-700 transition-colors">Elegir Familiares</button>
                 `;
             } else if (wizardStep === 2) {
-                const family = await fetch('JSON/family.json').then(r => r.json());
+                const family = await loadWizardFamily();
                 content.innerHTML = `
                     <div class="flex items-center justify-between mb-4">
                         <button onclick="prevWizardStep()" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100" aria-label="Volver">
@@ -329,6 +335,7 @@
                         </button>
                         <div class="w-10 h-10"></div>
                     </div>
+                    ${renderWizardSummary({ showFamily: false, showBags: false, family, bags: null })}
                     <h2 class="text-2xl font-bold mb-6 text-center">¿Quiénes van?</h2>
                     <div class="grid grid-cols-2 gap-4 mb-6">
                         ${family.map(f => `
@@ -344,7 +351,7 @@
                     </div>
                 `;
             } else if (wizardStep === 3) {
-                const bags = await fetch('JSON/bags.json').then(r => r.json());
+                const [bags, family] = await Promise.all([loadWizardBags(), loadWizardFamily()]);
                 content.innerHTML = `
                     <div class="flex flex-col h-full min-h-0">
                         <div class="flex items-center justify-between mb-2 flex-shrink-0">
@@ -353,6 +360,7 @@
                             </button>
                             <div class="w-10 h-10"></div>
                         </div>
+                        ${renderWizardSummary({ showFamily: true, showBags: false, family, bags })}
                         <h2 class="text-2xl font-bold mb-4 text-center flex-shrink-0">¿Qué bolsos llevarás?</h2>
                         <div class="bag-list flex-1 overflow-y-auto mb-4 min-h-0 scrollable">
                             <div class="grid grid-cols-1 gap-4">
@@ -373,9 +381,7 @@
                     </div>
                 `;
             } else if (wizardStep === 4) {
-                const bags = await fetch('JSON/bags.json').then(r => r.json());
-                const items = await fetch('JSON/inventario.json').then(r => r.json());
-                const family = await fetch('JSON/family.json').then(r => r.json());
+                const [bags, items, family] = await Promise.all([loadWizardBags(), loadWizardItems(), loadWizardFamily()]);
                 const familyMap = {};
                 family.forEach(f => familyMap[f.id] = f);
 
@@ -391,6 +397,7 @@
                         </button>
                         <div class="w-10 h-10"></div>
                     </div>
+                    ${renderWizardSummary({ showFamily: true, showBags: true, family, bags })}
                     <h2 class="text-2xl font-bold mb-6 text-center flex-shrink-0">Llena los Bolsos</h2>
                     <div class="bag-list-assign scrollable max-h-40 mb-4">
                         ${selectedBags.map((bagId, index) => {
@@ -622,6 +629,73 @@
             }
             wizardTripsCache = viajes;
             return viajes;
+        }
+
+        async function loadWizardFamily() {
+            if (wizardFamilyCache) return wizardFamilyCache;
+            let family = [];
+            try {
+                const response = await fetch('JSON/family.json');
+                if (response.ok) {
+                    family = await response.json();
+                }
+            } catch (e) {
+                family = [];
+            }
+            wizardFamilyCache = family.filter(f => (f.name || '').toLowerCase() !== 'casa');
+            return wizardFamilyCache;
+        }
+
+        async function loadWizardBags() {
+            if (wizardBagsCache) return wizardBagsCache;
+            let bags = [];
+            try {
+                const response = await fetch('JSON/bags.json');
+                if (response.ok) {
+                    bags = await response.json();
+                }
+            } catch (e) {
+                bags = [];
+            }
+            wizardBagsCache = bags;
+            return wizardBagsCache;
+        }
+
+        async function loadWizardItems() {
+            if (wizardItemsCache) return wizardItemsCache;
+            let items = [];
+            try {
+                const response = await fetch('JSON/inventario.json');
+                if (response.ok) {
+                    items = await response.json();
+                }
+            } catch (e) {
+                items = [];
+            }
+            wizardItemsCache = items;
+            return wizardItemsCache;
+        }
+
+        function renderWizardSummary({ showFamily, showBags, family, bags }) {
+            const titleText = tripTitle ? tripTitle : 'Sin nombre';
+            const familyNames = showFamily && family
+                ? selectedFamily.map(id => family.find(f => f.id === id)).filter(f => f).map(f => f.name)
+                : [];
+            const bagNames = showBags && bags
+                ? selectedBags.map(id => bags.find(b => b.id === id)).filter(b => b).map(b => b.name)
+                : [];
+            const familyText = familyNames.length ? familyNames.join(', ') : 'Ninguno';
+            const bagText = bagNames.length ? bagNames.join(', ') : 'Ninguno';
+            return `
+                <div class="bg-gray-50 rounded-lg p-3 text-sm text-gray-600 mb-4">
+                    <div class="flex flex-wrap gap-x-2 gap-y-1">
+                        <span class="font-semibold text-gray-700">Viaje:</span>
+                        <span>${titleText}</span>
+                        ${showFamily ? `<span class="font-semibold text-gray-700 ml-2">Familia:</span><span>${familyText}</span>` : ''}
+                        ${showBags ? `<span class="font-semibold text-gray-700 ml-2">Bolsos:</span><span>${bagText}</span>` : ''}
+                    </div>
+                </div>
+            `;
         }
 
         function normalizeTripTitle(value) {

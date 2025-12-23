@@ -96,6 +96,9 @@ Este documento describe la app como un negocio con procesos, sin detalles tecnic
   - Desde cualquier paso, despues de escribir el nombre, se puede crear el viaje y terminarlo luego en la pestaña Bolsos.
   - No hay resumen final; el viaje se crea directo.
   - Al volver atras, debe conservar lo seleccionado previamente.
+  - Cada paso debe mostrar un resumen de lo ya seleccionado (nombre, familiares, bolsos).
+  - Cada paso debe tener flecha de volver atras.
+  - Si el nombre termina con punto o espacio, se elimina ese caracter al guardar.
 
 ### Pantalla: Viaje actual (`index.html`)
 - Objetivo: operar el viaje ya creado.
