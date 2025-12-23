@@ -285,6 +285,7 @@
         let selectedFamily = [];
         let selectedBags = [];
         let bagAssignments = {}; // itemId: bagId
+        let wizardTripsCache = null;
         
         // Abrir modal del wizard
         function openNuevoViajeModal() {
@@ -293,6 +294,7 @@
             selectedFamily = [];
             selectedBags = [];
             bagAssignments = {};
+            wizardTripsCache = null;
             renderWizardStep();
             document.getElementById('modal-nuevo-viaje').classList.remove('hidden');
         }
@@ -307,13 +309,26 @@
             const content = document.getElementById('wizard-content');
             if (wizardStep === 1) {
                 content.innerHTML = `
+                    <div class="flex items-center justify-between mb-4">
+                        <button onclick="closeNuevoViajeModal()" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100" aria-label="Volver">
+                            <i class="fa-solid fa-arrow-left text-gray-700"></i>
+                        </button>
+                        <div class="w-10 h-10"></div>
+                    </div>
                     <h2 class="text-2xl font-bold mb-6 text-center">¿Dónde vas?</h2>
                     <input type="text" id="trip-title" placeholder="Ej. Algarrobo, Santiago..." class="w-full border border-gray-300 rounded-lg px-4 py-3 text-lg mb-6" value="${tripTitle}">
+                    <p id="trip-title-error" class="hidden text-red-600 text-sm mb-4"></p>
                     <button onclick="nextWizardStep()" class="w-full bg-blue-600 text-white rounded-lg py-4 px-6 font-bold text-lg shadow-lg hover:bg-blue-700 transition-colors">Elegir Familiares</button>
                 `;
             } else if (wizardStep === 2) {
                 const family = await fetch('JSON/family.json').then(r => r.json());
                 content.innerHTML = `
+                    <div class="flex items-center justify-between mb-4">
+                        <button onclick="prevWizardStep()" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100" aria-label="Volver">
+                            <i class="fa-solid fa-arrow-left text-gray-700"></i>
+                        </button>
+                        <div class="w-10 h-10"></div>
+                    </div>
                     <h2 class="text-2xl font-bold mb-6 text-center">¿Quiénes van?</h2>
                     <div class="grid grid-cols-2 gap-4 mb-6">
                         ${family.map(f => `
@@ -323,12 +338,21 @@
                             </div>
                         `).join('')}
                     </div>
-                    <button onclick="nextWizardStep()" class="w-full bg-blue-600 text-white rounded-lg py-4 px-6 font-bold text-lg shadow-lg hover:bg-blue-700 transition-colors">Elegir Bolsos</button>
+                    <div class="flex flex-col gap-3">
+                        <button onclick="nextWizardStep()" class="w-full bg-blue-600 text-white rounded-lg py-4 px-6 font-bold text-lg shadow-lg hover:bg-blue-700 transition-colors">Elegir Bolsos</button>
+                        <button onclick="createTrip()" class="w-full bg-green-600 text-white rounded-lg py-4 px-6 font-bold text-lg shadow-lg hover:bg-green-700 transition-colors">Crear viaje</button>
+                    </div>
                 `;
             } else if (wizardStep === 3) {
                 const bags = await fetch('JSON/bags.json').then(r => r.json());
                 content.innerHTML = `
                     <div class="flex flex-col h-full min-h-0">
+                        <div class="flex items-center justify-between mb-2 flex-shrink-0">
+                            <button onclick="prevWizardStep()" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100" aria-label="Volver">
+                                <i class="fa-solid fa-arrow-left text-gray-700"></i>
+                            </button>
+                            <div class="w-10 h-10"></div>
+                        </div>
                         <h2 class="text-2xl font-bold mb-4 text-center flex-shrink-0">¿Qué bolsos llevarás?</h2>
                         <div class="bag-list flex-1 overflow-y-auto mb-4 min-h-0 scrollable">
                             <div class="grid grid-cols-1 gap-4">
@@ -341,7 +365,10 @@
                             </div>
                         </div>
                         <div class="flex-shrink-0">
-                            <button onclick="nextWizardStep()" class="w-full bg-blue-600 text-white rounded-lg py-4 px-6 font-bold text-lg shadow-lg hover:bg-blue-700 transition-colors">Llena los Bolsos</button>
+                            <div class="flex flex-col gap-3">
+                                <button onclick="nextWizardStep()" class="w-full bg-blue-600 text-white rounded-lg py-4 px-6 font-bold text-lg shadow-lg hover:bg-blue-700 transition-colors">Llena los Bolsos</button>
+                                <button onclick="createTrip()" class="w-full bg-green-600 text-white rounded-lg py-4 px-6 font-bold text-lg shadow-lg hover:bg-green-700 transition-colors">Crear viaje</button>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -358,6 +385,12 @@
                 }
                 
                 content.innerHTML = `
+                    <div class="flex items-center justify-between mb-4">
+                        <button onclick="prevWizardStep()" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100" aria-label="Volver">
+                            <i class="fa-solid fa-arrow-left text-gray-700"></i>
+                        </button>
+                        <div class="w-10 h-10"></div>
+                    </div>
                     <h2 class="text-2xl font-bold mb-6 text-center flex-shrink-0">Llena los Bolsos</h2>
                     <div class="bag-list-assign scrollable max-h-40 mb-4">
                         ${selectedBags.map((bagId, index) => {
@@ -405,11 +438,25 @@
         }
         
         // Funciones del wizard
-        function nextWizardStep() {
+        async function nextWizardStep() {
             if (wizardStep === 1) {
-                tripTitle = document.getElementById('trip-title').value;
+                const input = document.getElementById('trip-title');
+                const validation = await validateTripTitle(input ? input.value : '');
+                if (!validation.ok) {
+                    showTripTitleError(validation.message);
+                    if (input) input.focus();
+                    return;
+                }
+                tripTitle = validation.title;
+                if (input) input.value = tripTitle;
             }
             wizardStep++;
+            renderWizardStep();
+        }
+
+        function prevWizardStep() {
+            if (wizardStep <= 1) return;
+            wizardStep--;
             renderWizardStep();
         }
         
@@ -506,6 +553,20 @@
         }
         
         async function createTrip() {
+            const validation = await validateTripTitle(tripTitle);
+            if (!validation.ok) {
+                tripTitle = validation.title || '';
+                wizardStep = 1;
+                await renderWizardStep();
+                showTripTitleError(validation.message);
+                const input = document.getElementById('trip-title');
+                if (input) {
+                    input.value = tripTitle;
+                    input.focus();
+                }
+                return;
+            }
+            tripTitle = validation.title;
             // Crear el viaje
             const viajes = JSON.parse(localStorage.getItem('viajes') || '[]');
             const newTripId = viajes.length > 0 ? Math.max(...viajes.map(v => v.id)) + 1 : 1;
@@ -522,6 +583,7 @@
             // Crear items_trips
             const itemsTrips = JSON.parse(localStorage.getItem('itemsTrips') || '[]');
             Object.keys(bagAssignments).forEach(itemId => {
+                if (!/^\d+$/.test(itemId)) return;
                 itemsTrips.push({
                     tripId: newTripId,
                     itemId: parseInt(itemId),
@@ -533,11 +595,65 @@
             // Redirect to index.html with the new trip
             window.location.href = `index.html?viaje=${newTripId}`;
         }
+
+        async function loadWizardTrips() {
+            if (wizardTripsCache) return wizardTripsCache;
+            let viajes = [];
+            try {
+                const response = await fetch('JSON/viajes.json');
+                if (response.ok) {
+                    viajes = await response.json();
+                }
+            } catch (e) {
+                viajes = [];
+            }
+            const savedTrips = localStorage.getItem('viajes');
+            if (savedTrips) {
+                try {
+                    const savedData = JSON.parse(savedTrips);
+                    savedData.forEach(savedTrip => {
+                        if (!viajes.find(v => v.id === savedTrip.id)) {
+                            viajes.push(savedTrip);
+                        }
+                    });
+                } catch (e) {
+                    // ignore malformed localStorage
+                }
+            }
+            wizardTripsCache = viajes;
+            return viajes;
+        }
+
+        function normalizeTripTitle(value) {
+            return String(value || '').replace(/[.\s]+$/, '');
+        }
+
+        async function validateTripTitle(value) {
+            const trimmed = normalizeTripTitle(value);
+            if (!trimmed) {
+                return { ok: false, title: trimmed, message: 'Escribe un nombre para el viaje.' };
+            }
+            const viajes = await loadWizardTrips();
+            const normalized = trimmed.toLowerCase();
+            const exists = viajes.some(v => (v.nombre || '').trim().toLowerCase() === normalized);
+            if (exists) {
+                return { ok: false, title: trimmed, message: 'Ese nombre ya existe. Usa uno distinto.' };
+            }
+            return { ok: true, title: trimmed };
+        }
+
+        function showTripTitleError(message) {
+            const errorEl = document.getElementById('trip-title-error');
+            if (!errorEl) return;
+            errorEl.textContent = message || '';
+            errorEl.classList.toggle('hidden', !message);
+        }
         
         // Expose functions to window
         window.openNuevoViajeModal = openNuevoViajeModal;
         window.closeNuevoViajeModal = closeNuevoViajeModal;
         window.nextWizardStep = nextWizardStep;
+        window.prevWizardStep = prevWizardStep;
         window.toggleFamily = toggleFamily;
         window.toggleBag = toggleBag;
         window.selectBagForAssignment = selectBagForAssignment;
