@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelApp Onboarding</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilo para ocultar la barra de desplazamiento */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Snap scrolling para centrar los mensajes */
+        .snap-x {
+            scroll-snap-type: x mandatory;
+        }
+        .snap-center {
+            scroll-snap-align: center;
+        }
+
+        /* Transiciones suaves para los puntos y el botón */
+        .transition-all-custom {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #d1d5db; /* gray-300 */
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: #2563eb; /* blue-600 */
+            width: 24px;
+            border-radius: 5px;
+        }
+
+        /* Contenedor principal para simular pantalla de celular */
+        body {
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .phone-container {
+            width: 375px;
+            height: 667px;
+            background: white;
+            border-radius: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-container">
+        <!-- Carrusel de mensajes -->
+        <div id="carousel" class="flex-1 overflow-x-auto flex snap-x no-scrollbar">
+            
+            <!-- Pantalla 1 -->
+            <section class="min-w-full h-full flex flex-col snap-center p-8">
+                <div class="h-1/3 flex items-end justify-center text-center">
+                    <h1 class="text-2xl font-bold text-gray-800">Nunca más olvides algo importante al viajar</h1>
+                </div>
+                <div class="h-1/3 flex items-center justify-center">
+                    <!-- Representación de maleta/orden -->
+                    <svg class="w-40 h-40 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                    </svg>
+                </div>
+                <div class="h-1/3 flex items-start justify-center text-center pt-4">
+                    <p class="text-gray-500 text-lg">Todo tu equipaje claro y ordenado</p>
+                </div>
+            </section>
+
+            <!-- Pantalla 2 -->
+            <section class="min-w-full h-full flex flex-col snap-center p-8">
+                <div class="h-1/3 flex items-end justify-center text-center">
+                    <h1 class="text-2xl font-bold text-gray-800">Cada familiar sabe qué llevar</h1>
+                </div>
+                <div class="h-1/3 flex items-center justify-center">
+                    <!-- Representación de grupo/familia -->
+                    <svg class="w-40 h-40 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                </div>
+                <div class="h-1/3 flex items-start justify-center text-center pt-4">
+                    <p class="text-gray-500 text-lg">Bolsos por persona, niños y mascotas incluidos</p>
+                </div>
+            </section>
+
+            <!-- Pantalla 3 -->
+            <section class="min-w-full h-full flex flex-col snap-center p-8">
+                <div class="h-1/3 flex items-end justify-center text-center">
+                    <h1 class="text-2xl font-bold text-gray-800">Recorre tu casa una sola vez</h1>
+                </div>
+                <div class="h-1/3 flex items-center justify-center">
+                    <!-- Representación de casa/recorrido -->
+                    <svg class="w-40 h-40 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                    </svg>
+                </div>
+                <div class="h-1/3 flex items-start justify-center text-center pt-4">
+                    <p class="text-gray-500 text-lg">La app te dice qué recoger y desde dónde</p>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Área de navegación inferior -->
+        <div class="h-24 flex items-center justify-center px-8 relative">
+            
+            <!-- Puntos dinámicos -->
+            <div id="pagination-dots" class="flex space-x-2 transition-all-custom">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <!-- Botón Continuar (oculto por defecto) -->
+            <button id="btn-continue" class="hidden absolute w-full max-w-xs bg-blue-600 text-white font-semibold py-4 rounded-2xl shadow-lg transition-all-custom transform scale-95 opacity-0">
+                Continuar
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const carousel = document.getElementById('carousel');
+        const dots = document.querySelectorAll('.dot');
+        const paginationDots = document.getElementById('pagination-dots');
+        const btnContinue = document.getElementById('btn-continue');
+
+        carousel.addEventListener('scroll', () => {
+            const scrollLeft = carousel.scrollLeft;
+            const width = carousel.offsetWidth;
+            
+            // Calculamos el índice actual basado en el scroll
+            const index = Math.round(scrollLeft / width);
+
+            // Actualizamos los puntos
+            dots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+
+            // Lógica especial para la última pantalla (índice 2)
+            if (index === 2) {
+                // Ocultar puntos
+                paginationDots.classList.add('opacity-0', 'pointer-events-none');
+                
+                // Mostrar botón
+                btnContinue.classList.remove('hidden');
+                setTimeout(() => {
+                    btnContinue.classList.add('opacity-100', 'scale-100');
+                }, 10);
+            } else {
+                // Volver a mostrar puntos
+                paginationDots.classList.remove('opacity-0', 'pointer-events-none');
+                
+                // Ocultar botón
+                btnContinue.classList.remove('opacity-100', 'scale-100');
+                setTimeout(() => {
+                    if (index !== 2) btnContinue.classList.add('hidden');
+                }, 400);
+            }
+        });
+
+        // Evento opcional para el botón
+        btnContinue.addEventListener('click', () => {
+            const box = document.createElement('div');
+            box.innerText = "¡Bienvenido a la aventura!";
+            box.style.position = 'absolute';
+            box.style.bottom = '100px';
+            box.style.left = '50%';
+            box.style.transform = 'translateX(-50%)';
+            box.style.backgroundColor = '#1f2937';
+            box.style.color = 'white';
+            box.style.padding = '10px 20px';
+            box.style.borderRadius = '10px';
+            box.style.zIndex = '100';
+            
+            document.querySelector('.phone-container').appendChild(box);
+            setTimeout(() => box.remove(), 2000);
+        });
+    </script>
+</body>
+</html>
