@@ -21,6 +21,32 @@ Object.keys(events).forEach(key => {
 // Apply CSS vars
 utils.attachCssVars();
 
+function applyDemoState() {
+    const demoBagId = 3;
+    const demoItems = [
+        { name: 'Billetera', owner: null, loc: 'Entrada', icon: '', category: 'otros' },
+        { name: 'Celular', owner: null, loc: 'Dormitorio', icon: '', category: 'otros' },
+        { name: 'Notebook', owner: null, loc: 'Dormitorio', icon: '', category: 'otros' },
+        { name: 'Cargador Notebook', owner: null, loc: 'Dormitorio', icon: '', category: 'otros' },
+        { name: 'Llaves', owner: null, loc: 'Entrada', icon: '', category: 'otros' }
+    ];
+
+    const maxId = state.inventory.reduce((max, item) => Math.max(max, item.id || 0), 0);
+    const demoInventory = demoItems.map((item, index) => ({
+        id: maxId + index + 1,
+        ...item
+    }));
+
+    state.inventory = [...state.inventory, ...demoInventory];
+    state.itemsTrips = demoInventory.map(item => ({
+        itemId: item.id,
+        tripId: state.currentTripId,
+        bagId: demoBagId,
+        checked: true
+    }));
+    state.lockedBags[demoBagId] = true;
+}
+
 // Initialize the app
 export async function initApp(tabName) {
     state.currentTab = tabName;
@@ -30,11 +56,19 @@ export async function initApp(tabName) {
     const viajeParam = urlParams.get('viaje');
     const bolsoParam = urlParams.get('bolso');
     const modoParam = urlParams.get('modo');
+    const demoParam = urlParams.get('demo');
     
     if (viajeParam) {
         state.currentTripId = parseInt(viajeParam);
     } else {
         state.currentTripId = 1; // Default
+    }
+
+    if (demoParam === '1') {
+        state.demoMode = true;
+        if (document.body) {
+            document.body.classList.add('demo-mode');
+        }
     }
     
     // Modo asignación
@@ -63,6 +97,10 @@ export async function initApp(tabName) {
     await data.loadItemsTrips();
     await data.loadInventory();
     await data.loadTripName();
+
+    if (state.demoMode) {
+        applyDemoState();
+    }
     
     // Initial render
     render.render();

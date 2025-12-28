@@ -2,6 +2,7 @@
 export const state = {
   // --- ESTADO DE LA APLICACIÓN ---
   currentTab: 'bolsos',
+  demoMode: false,
 
   // Estado de edición de bolsos e items
   editingBags: {}, // { bagId: true/false } - bolsos en modo edición

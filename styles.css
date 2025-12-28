@@ -354,3 +354,8 @@ input, select, button { font-size: 16px !important; }
 .bag-card button[onclick*="toggleBagEditMenu"] {
     background-color: #f3f4f6;
 }
+
+/* Demo mode tweaks */
+body.demo-mode .family-column > h3 {
+    display: none;
+}
