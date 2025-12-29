@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TravelApp Onboarding</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Estilo para ocultar la barra de desplazamiento */
         .no-scrollbar::-webkit-scrollbar {
@@ -57,7 +56,8 @@
             background-color: #f3f4f6;
             height: 100%;
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+           /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
         .app-container {
             width: 100%;
@@ -68,236 +68,193 @@
             display: flex;
             flex-direction: column;
         }
+
+        .carousel-stage {
+            flex: 1 1 auto;
+        }
+
+        .screen {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            --top-row-height: 140px;
+            --middle-row-height: 340px;
+            --bottom-row-height: 40px;
+            --top-row-offset: 5px;
+            --bottom-row-offset: 10px;
+            --middle-row-offset: 40px;
+            --top-row-padding: 20px;
+            --bottom-row-padding: 20px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        .screen-row {
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            left: 0;
+            width: 100%;
+        }
+
+        .screen-row-top {
+            align-items: center;
+            text-align: center;
+            top: var(--top-row-offset);
+            height: var(--top-row-height);
+            padding: var(--top-row-padding);
+            box-sizing: border-box;
+        }
+
+        .screen-row-middle {
+            align-items: center;
+            width: 100%;
+            height: var(--middle-row-height);
+            top: calc(50% + var(--middle-row-offset));
+            transform: translateY(-50%);
+        }
+
+        .screen-row-bottom {
+            align-items: flex-start;
+            text-align: center;
+            padding-top: 16px;
+            bottom: var(--bottom-row-offset);
+            height: var(--bottom-row-height);
+            padding: var(--bottom-row-padding);
+            box-sizing: border-box;
+        }
+
+        .screen-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .nav-area {
+            height: 96px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 32px;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .pagination-dots {
+            position: absolute;
+            left: 50%;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            transform: translateX(-50%);
+            bottom: 42px;
+        }
+
+        .btn-continue {
+            position: absolute;
+            left: 50%;
+            bottom: 24px;
+            width: 100%;
+            max-width: 20rem;
+            background-color: #2563eb;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 1.125rem;
+            padding: 16px 0;
+            border: none;
+            border-radius: 999px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.12), 0 4px 6px -4px rgba(0, 0, 0, 0.12);
+            transform: translateX(-50%) scale(0.95);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .is-hidden {
+            display: none;
+        }
+
+        .is-visible {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+            pointer-events: auto;
+        }
+
+        .is-faded {
+            opacity: 0;
+        }
+
+        .is-disabled {
+            pointer-events: none;
+        }
+
+        .main-message {
+            font-size: 1.875rem;
+            font-weight: 800;
+            color: #1f2937;
+            line-height: 1.375;
+            letter-spacing: -0.07em;
+            text-transform: uppercase;
+        }
+
+        .sub-message {
+            font-size: 1.125rem;
+            font-weight: 400;
+            color: #6b7280;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
 
     <div class="app-container">
-        <div id="onboardingView" class="flex-1 flex flex-col">
-            <!-- Carrusel de mensajes -->
-            <div id="carousel" class="flex-1">
-                <div id="carouselTrack" class="carousel-track">
+        <!-- Carrusel de mensajes -->
+        <div id="carousel" class="carousel-stage">
+            <div id="carouselTrack" class="carousel-track">
 
-                <!-- Pantalla 1 -->
-                <section class="min-w-full h-full flex flex-col p-8">
-                    <div class="h-1/3 flex items-end justify-center text-center">
-                        <h1 class="text-2xl font-bold text-gray-800">Nunca más olvides algo importante al viajar</h1>
-                    </div>
-                    <div class="h-1/3 flex items-center justify-center">
-                        <!-- Representación de maleta/orden -->
-                        <svg class="w-40 h-40 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-                        </svg>
-                    </div>
-                    <div class="h-1/3 flex items-start justify-center text-center pt-4">
-                        <p class="text-gray-500 text-lg">Todo tu equipaje claro y ordenado</p>
-                    </div>
-                </section>
-
-                <!-- Pantalla 2 -->
-                <section class="min-w-full h-full flex flex-col p-8">
-                    <div class="h-1/3 flex items-end justify-center text-center">
-                        <h1 class="text-2xl font-bold text-gray-800">Cada familiar sabe qué llevar</h1>
-                    </div>
-                    <div class="h-1/3 flex items-center justify-center">
-                        <!-- Representación de grupo/familia -->
-                        <svg class="w-40 h-40 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                        </svg>
-                    </div>
-                    <div class="h-1/3 flex items-start justify-center text-center pt-4">
-                        <p class="text-gray-500 text-lg">Bolsos por persona, niños y mascotas incluidos</p>
-                    </div>
-                </section>
-
-                <!-- Pantalla 3 -->
-                <section class="min-w-full h-full flex flex-col p-8">
-                    <div class="h-1/3 flex items-end justify-center text-center">
-                        <h1 class="text-2xl font-bold text-gray-800">Recorre tu casa una sola vez</h1>
-                    </div>
-                    <div class="h-1/3 flex items-center justify-center">
-                        <!-- Representación de casa/recorrido -->
-                        <svg class="w-40 h-40 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                        </svg>
-                    </div>
-                    <div class="h-1/3 flex items-start justify-center text-center pt-4">
-                        <p class="text-gray-500 text-lg">La app te dice qué recoger y desde dónde</p>
-                    </div>
-                </section>
-
-                <!-- Pantalla 4 -->
-                <section class="min-w-full h-full flex flex-col p-6">
-                    <div class="text-center mt-4 space-y-2">
-                        <h1 id="bagDemoPrimary" class="text-2xl font-bold text-gray-800">Marca lo que ya tienes</h1>
-                        <p id="bagDemoSecondary" class="text-gray-500 text-lg hidden"></p>
-                    </div>
-
-                    <div class="flex-1 mt-6 flex flex-col">
-                        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-4 shadow-sm">
-                            <div class="flex items-center gap-3">
-                                <img src="../images/bags/b3.jpeg" alt="Mochila" class="w-16 h-16 rounded-xl object-cover border">
-                                <div>
-                                    <h2 class="text-lg font-bold text-gray-800">Mochila</h2>
-                                </div>
-                            </div>
-                            <div class="mt-4 flex items-center gap-2">
-                                <div class="flex-1 bg-gray-200 rounded-full h-2">
-                                    <div id="bagDemoProgress" class="bg-blue-500 h-2 rounded-full" style="width: 0%;"></div>
-                                </div>
-                                <span id="bagDemoCount" class="text-xs font-semibold text-blue-600">0/5 items</span>
-                            </div>
-                            <ul class="mt-4 space-y-3">
-                                <li>
-                                    <label class="flex items-start gap-3">
-                                        <input type="checkbox" class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded peer" data-bag-item>
-                                        <span class="text-sm font-medium text-gray-800 peer-checked:line-through peer-checked:text-gray-400">Billetera</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="flex items-start gap-3">
-                                        <input type="checkbox" class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded peer" data-bag-item>
-                                        <span class="text-sm font-medium text-gray-800 peer-checked:line-through peer-checked:text-gray-400">Celular</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="flex items-start gap-3">
-                                        <input type="checkbox" class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded peer" data-bag-item>
-                                        <span class="text-sm font-medium text-gray-800 peer-checked:line-through peer-checked:text-gray-400">Notebook</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="flex items-start gap-3">
-                                        <input type="checkbox" class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded peer" data-bag-item>
-                                        <span class="text-sm font-medium text-gray-800 peer-checked:line-through peer-checked:text-gray-400">Cargador Notebook</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="flex items-start gap-3">
-                                        <input type="checkbox" class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded peer" data-bag-item>
-                                        <span class="text-sm font-medium text-gray-800 peer-checked:line-through peer-checked:text-gray-400">Llaves</span>
-                                    </label>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="mt-auto pt-4 flex justify-end">
-                            <button id="btnZones" class="hidden text-xs text-blue-600 border border-blue-200 px-3 py-2 rounded-full">
-                                Ver por zonas de la casa
-                            </button>
-                        </div>
-                    </div>
-                </section>
+            <!-- Pantalla 1 -->
+            <section class="screen">
+                <div class="screen-row screen-row-top main-message" data-main-index="0"></div>
+                <div class="screen-row screen-row-middle">
+                    <img src="1.png" alt="Equipaje ordenado" class="screen-image" />
                 </div>
-            </div>
+                <div class="screen-row screen-row-bottom sub-message" data-sub-index="0"></div>
+            </section>
 
-            <!-- Área de navegación inferior -->
-            <div class="h-24 flex items-center justify-center px-8 relative">
-                
-                <!-- Puntos dinámicos -->
-                <div id="pagination-dots" class="flex space-x-2 transition-all-custom">
-                    <div class="dot active"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
+            <!-- Pantalla 2 -->
+            <section class="screen">
+                <div class="screen-row screen-row-top main-message" data-main-index="1"></div>
+                <div class="screen-row screen-row-middle">
+                    <img src="2.png" alt="Familia y bolsos" class="screen-image" />
                 </div>
+                <div class="screen-row screen-row-bottom sub-message" data-sub-index="1"></div>
+            </section>
 
-                <!-- Botón Continuar (oculto por defecto) -->
-                <button id="btn-continue" class="hidden absolute w-full max-w-xs bg-blue-600 text-white font-semibold py-4 rounded-2xl shadow-lg transition-all-custom transform scale-95 opacity-0">
-                    Continuar
-                </button>
+            <!-- Pantalla 3 -->
+            <section class="screen">
+                <div class="screen-row screen-row-top main-message" data-main-index="2"></div>
+                <div class="screen-row screen-row-middle">
+                    <img src="3.png" alt="Recorrido en casa" class="screen-image" />
+                </div>
+                <div class="screen-row screen-row-bottom sub-message" data-sub-index="2"></div>
+            </section>
             </div>
         </div>
 
-        <div id="zonesView" class="hidden flex-1 flex flex-col p-6 overflow-y-auto no-scrollbar">
-            <div class="space-y-2">
-                <div id="zonesStatusLine" class="text-sm text-gray-500 hidden"></div>
-                <div id="zonesNextAction" class="hidden space-y-2">
-                    <button id="zonesNextBtn" class="w-full max-w-xs bg-blue-600 text-white font-semibold py-3 rounded-xl shadow-md">
-                        Siguiente: Dormitorio (4 items)
-                    </button>
-                    <button id="zonesBackBtn" class="w-full text-xs text-gray-500">
-                        Volver al bolso
-                    </button>
-                </div>
-                <h1 id="zonesTitle" class="text-2xl font-bold text-gray-800">Recorre tu casa una sola vez</h1>
-                <p id="zonesSubtitle" class="text-gray-500 text-lg">empieza por donde estés ahora</p>
+        <!-- Área de navegación inferior -->
+        <div class="nav-area">
+            
+            <!-- Puntos dinámicos -->
+            <div id="pagination-dots" class="pagination-dots transition-all-custom">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
             </div>
 
-            <div id="zonesFinal" class="hidden mt-6 text-center space-y-4">
-                <p class="text-xl font-semibold text-gray-800">Tu casa está lista para salir.</p>
-                <a id="zonesReviewBtn" href="../index.html?demo=1" class="w-full max-w-xs mx-auto bg-blue-600 text-white font-semibold py-4 rounded-2xl shadow-lg inline-flex items-center justify-center">
-                    Revisar bolsos
-                </a>
-            </div>
-
-            <div id="zonesList" class="mt-6 space-y-4">
-                <div class="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm" data-zone-card data-zone-id="dormitorio">
-                    <button type="button" class="w-full flex items-center justify-between text-left" data-zone-toggle>
-                        <div>
-                            <div class="text-base font-semibold text-gray-800">Dormitorio</div>
-                            <div class="text-sm text-gray-500" data-zone-count>2/5</div>
-                        </div>
-                        <span class="text-green-600 text-lg hidden" data-zone-check>✔️</span>
-                    </button>
-                    <div class="mt-4 space-y-3 hidden" data-zone-items>
-                        <label class="flex items-start gap-3">
-                            <input type="checkbox" class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded peer" data-zone-item>
-                            <div>
-                                <div class="text-sm font-medium text-gray-800 peer-checked:line-through peer-checked:text-gray-400">Celular</div>
-                                <div class="text-xs text-gray-400">Va a la Mochila</div>
-                            </div>
-                        </label>
-                        <label class="flex items-start gap-3">
-                            <input type="checkbox" class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded peer" data-zone-item>
-                            <div>
-                                <div class="text-sm font-medium text-gray-800 peer-checked:line-through peer-checked:text-gray-400">Notebook</div>
-                                <div class="text-xs text-gray-400">Va a la Mochila</div>
-                            </div>
-                        </label>
-                        <label class="flex items-start gap-3">
-                            <input type="checkbox" class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded peer" data-zone-item>
-                            <div>
-                                <div class="text-sm font-medium text-gray-800 peer-checked:line-through peer-checked:text-gray-400">Cargador Notebook</div>
-                                <div class="text-xs text-gray-400">Va a la Mochila</div>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm" data-zone-card data-zone-id="entrada">
-                    <button type="button" class="w-full flex items-center justify-between text-left" data-zone-toggle>
-                        <div>
-                            <div class="text-base font-semibold text-gray-800">Entrada</div>
-                            <div class="text-sm text-gray-500" data-zone-count>2/5</div>
-                        </div>
-                        <span class="text-green-600 text-lg hidden" data-zone-check>✔️</span>
-                    </button>
-                    <div class="mt-4 space-y-3 hidden" data-zone-items>
-                        <label class="flex items-start gap-3">
-                            <input type="checkbox" class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded peer" data-zone-item>
-                            <div>
-                                <div class="text-sm font-medium text-gray-800 peer-checked:line-through peer-checked:text-gray-400">Billetera</div>
-                                <div class="text-xs text-gray-400">Va a la Mochila</div>
-                            </div>
-                        </label>
-                        <label class="flex items-start gap-3">
-                            <input type="checkbox" class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded peer" data-zone-item>
-                            <div>
-                                <div class="text-sm font-medium text-gray-800 peer-checked:line-through peer-checked:text-gray-400">Llaves</div>
-                                <div class="text-xs text-gray-400">Va a la Mochila</div>
-                            </div>
-                        </label>
-                        <label class="flex items-start gap-3">
-                            <input type="checkbox" class="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded peer" data-zone-item>
-                            <div>
-                                <div class="text-sm font-medium text-gray-800 peer-checked:line-through peer-checked:text-gray-400">Celular</div>
-                                <div class="text-xs text-gray-400">Va a la Mochila</div>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-            </div>
+            <!-- Botón Continuar (oculto por defecto) -->
+            <button id="btn-continue" class="btn-continue transition-all-custom is-hidden">
+                Continuar
+            </button>
         </div>
     </div>
 
@@ -307,23 +264,9 @@
         const dots = document.querySelectorAll('.dot');
         const paginationDots = document.getElementById('pagination-dots');
         const btnContinue = document.getElementById('btn-continue');
-        const onboardingView = document.getElementById('onboardingView');
-        const zonesView = document.getElementById('zonesView');
-        const btnZones = document.getElementById('btnZones');
-        const bagDemoPrimary = document.getElementById('bagDemoPrimary');
-        const bagDemoSecondary = document.getElementById('bagDemoSecondary');
-        const bagDemoProgress = document.getElementById('bagDemoProgress');
-        const bagDemoCount = document.getElementById('bagDemoCount');
-        const bagDemoItems = document.querySelectorAll('[data-bag-item]');
-        const zonesStatusLine = document.getElementById('zonesStatusLine');
-        const zonesNextAction = document.getElementById('zonesNextAction');
-        const zonesNextBtn = document.getElementById('zonesNextBtn');
-        const zonesBackBtn = document.getElementById('zonesBackBtn');
-        const zonesTitle = document.getElementById('zonesTitle');
-        const zonesSubtitle = document.getElementById('zonesSubtitle');
-        const zonesFinal = document.getElementById('zonesFinal');
-        const zoneCards = document.querySelectorAll('[data-zone-card]');
         const totalSteps = dots.length;
+        const mainMessageEls = document.querySelectorAll('[data-main-index]');
+        const subMessageEls = document.querySelectorAll('[data-sub-index]');
 
         let currentIndex = 0;
         let currentOffset = 0;
@@ -337,8 +280,40 @@
         let lastMoveTime = 0;
         let dragVelocity = 0;
         let snapRafId = null;
+        let buttonHideTimeout = null;
         const swipeThreshold = 50;
         const velocityThreshold = 0.35;
+
+        function applyMessages(nodes, messages, indexKey) {
+            nodes.forEach((el) => {
+                const index = Number(el.dataset[indexKey]);
+                if (Number.isInteger(index) && messages[index]) {
+                    el.textContent = messages[index];
+                }
+            });
+        }
+
+        async function loadMessages() {
+            try {
+                const [mainRes, secondaryRes] = await Promise.all([
+                    fetch('../JSON/main.json'),
+                    fetch('../JSON/secondary.json')
+                ]);
+                const [mainData, secondaryData] = await Promise.all([
+                    mainRes.json(),
+                    secondaryRes.json()
+                ]);
+
+                if (Array.isArray(mainData.messages)) {
+                    applyMessages(mainMessageEls, mainData.messages, 'mainIndex');
+                }
+                if (Array.isArray(secondaryData.messages)) {
+                    applyMessages(subMessageEls, secondaryData.messages, 'subIndex');
+                }
+            } catch (error) {
+                console.warn('No se pudieron cargar los mensajes JSON.', error);
+            }
+        }
 
         function updateUI(index) {
             dots.forEach((dot, i) => {
@@ -349,61 +324,26 @@
                 }
             });
 
-            if (index === totalSteps - 1) {
-                paginationDots.classList.add('opacity-0', 'pointer-events-none');
-                btnContinue.classList.remove('hidden');
-                setTimeout(() => {
-                    btnContinue.classList.add('opacity-100', 'scale-100');
-                }, 10);
-            } else {
-                paginationDots.classList.remove('opacity-0', 'pointer-events-none');
-                btnContinue.classList.remove('opacity-100', 'scale-100');
-                setTimeout(() => {
-                    if (index !== totalSteps - 1) btnContinue.classList.add('hidden');
-                }, 400);
+            if (buttonHideTimeout) {
+                clearTimeout(buttonHideTimeout);
+                buttonHideTimeout = null;
             }
-        }
 
-        function showOnboardingView() {
-            if (zonesView) zonesView.classList.add('hidden');
-            if (onboardingView) onboardingView.classList.remove('hidden');
-        }
-
-        function showZonesView() {
-            if (onboardingView) onboardingView.classList.add('hidden');
-            if (zonesView) zonesView.classList.remove('hidden');
-        }
-
-        function updateBagDemo() {
-            if (!bagDemoItems.length) return;
-            const checkedCount = Array.from(bagDemoItems).filter((item) => item.checked).length;
-            const total = bagDemoItems.length;
-            const progress = total > 0 ? (checkedCount / total) * 100 : 0;
-
-            if (bagDemoProgress) bagDemoProgress.style.width = `${progress}%`;
-            if (bagDemoCount) bagDemoCount.textContent = `${checkedCount}/${total} items`;
-
-            if (checkedCount >= 2) {
-                if (bagDemoPrimary) bagDemoPrimary.textContent = 'Vas avanzando';
-                if (bagDemoSecondary) {
-                    bagDemoSecondary.textContent = 'Quedan 3 items por guardar';
-                    bagDemoSecondary.classList.remove('hidden');
-                }
-                if (btnZones) btnZones.classList.remove('hidden');
-            } else if (checkedCount >= 1) {
-                if (bagDemoPrimary) bagDemoPrimary.textContent = 'Bien, ya empezaste!';
-                if (bagDemoSecondary) {
-                    bagDemoSecondary.textContent = 'Marca el siguiente item';
-                    bagDemoSecondary.classList.remove('hidden');
-                }
-                if (btnZones) btnZones.classList.add('hidden');
+            if (index === totalSteps - 1) {
+                paginationDots.classList.add('is-faded', 'is-disabled');
+                btnContinue.classList.remove('is-hidden');
+                requestAnimationFrame(() => {
+                    btnContinue.classList.add('is-visible');
+                });
             } else {
-                if (bagDemoPrimary) bagDemoPrimary.textContent = 'Marca lo que ya tienes';
-                if (bagDemoSecondary) {
-                    bagDemoSecondary.textContent = '';
-                    bagDemoSecondary.classList.add('hidden');
-                }
-                if (btnZones) btnZones.classList.add('hidden');
+                paginationDots.classList.remove('is-faded', 'is-disabled');
+                btnContinue.classList.remove('is-visible');
+                buttonHideTimeout = setTimeout(() => {
+                    if (currentIndex !== totalSteps - 1) {
+                        btnContinue.classList.add('is-hidden');
+                    }
+                    buttonHideTimeout = null;
+                }, 400);
             }
         }
 
@@ -591,153 +531,9 @@
             setOffset(offsetForIndex(currentIndex));
         });
 
-        const zones = {};
-        const zoneOrder = [];
-
-        zoneCards.forEach((card) => {
-            const zoneId = card.dataset.zoneId;
-            const toggleBtn = card.querySelector('[data-zone-toggle]');
-            const countEl = card.querySelector('[data-zone-count]');
-            const checkEl = card.querySelector('[data-zone-check]');
-            const itemsEl = card.querySelector('[data-zone-items]');
-            const zoneNameEl = card.querySelector('[data-zone-toggle] .text-base');
-            const items = Array.from(card.querySelectorAll('[data-zone-item]'));
-
-            zones[zoneId] = {
-                id: zoneId,
-                name: zoneNameEl ? zoneNameEl.textContent.trim() : zoneId,
-                baseCount: 2,
-                totalCount: 5,
-                card,
-                toggleBtn,
-                countEl,
-                checkEl,
-                itemsEl,
-                items,
-                complete: false
-            };
-            zoneOrder.push(zoneId);
-
-            if (toggleBtn && itemsEl) {
-                toggleBtn.addEventListener('click', () => {
-                    if (zones[zoneId].complete) return;
-                    itemsEl.classList.toggle('hidden');
-                });
-            }
-
-            items.forEach((item) => {
-                item.addEventListener('change', () => updateZone(zoneId));
-            });
-        });
-
-        function getNextIncompleteZone() {
-            return zoneOrder.find((zoneId) => !zones[zoneId].complete);
-        }
-
-        function refreshZoneCount(zone) {
-            const checkedCount = zone.items.filter((item) => item.checked).length;
-            const displayCount = Math.min(zone.totalCount, zone.baseCount + checkedCount);
-            if (zone.countEl) zone.countEl.textContent = `${displayCount}/${zone.totalCount}`;
-            return displayCount;
-        }
-
-        function setZoneComplete(zone) {
-            zone.complete = true;
-            if (zone.card) zone.card.classList.add('ring-2', 'ring-green-400');
-            if (zone.checkEl) zone.checkEl.classList.remove('hidden');
-            if (zone.itemsEl) zone.itemsEl.classList.add('hidden');
-            zone.items.forEach((item) => {
-                item.disabled = true;
-            });
-        }
-
-        function updateNextZoneAction() {
-            const nextZoneId = getNextIncompleteZone();
-            if (!nextZoneId || !zonesNextBtn) return;
-            const nextZone = zones[nextZoneId];
-            const remaining = Math.max(0, nextZone.totalCount - (nextZone.baseCount + nextZone.items.filter((item) => item.checked).length));
-            const remainingText = remaining === 1 ? '1 item' : `${remaining} items`;
-            zonesNextBtn.textContent = `Siguiente: ${nextZone.name} (${remainingText})`;
-        }
-
-        function updateZonesOverall() {
-            const allComplete = zoneOrder.length > 0 && zoneOrder.every((zoneId) => zones[zoneId].complete);
-            if (allComplete) {
-                if (zonesFinal) zonesFinal.classList.remove('hidden');
-                if (zonesStatusLine) zonesStatusLine.classList.add('hidden');
-                if (zonesNextAction) zonesNextAction.classList.add('hidden');
-                if (zonesTitle) zonesTitle.classList.add('hidden');
-                if (zonesSubtitle) zonesSubtitle.classList.add('hidden');
-                zoneOrder.forEach((zoneId) => {
-                    const zone = zones[zoneId];
-                    if (zone.itemsEl) zone.itemsEl.classList.add('hidden');
-                });
-                return;
-            }
-
-            if (zonesFinal) zonesFinal.classList.add('hidden');
-            if (zonesTitle) zonesTitle.classList.remove('hidden');
-            if (zonesSubtitle) zonesSubtitle.classList.remove('hidden');
-        }
-
-        function announceZoneComplete(zone) {
-            if (zonesStatusLine) {
-                zonesStatusLine.textContent = `${zone.name} listo.`;
-                zonesStatusLine.classList.remove('hidden');
-            }
-            if (zonesNextAction) zonesNextAction.classList.remove('hidden');
-            updateNextZoneAction();
-        }
-
-        function updateZone(zoneId) {
-            const zone = zones[zoneId];
-            const displayCount = refreshZoneCount(zone);
-
-            if (!zone.complete && displayCount >= zone.totalCount) {
-                setZoneComplete(zone);
-                announceZoneComplete(zone);
-            }
-
-            updateZonesOverall();
-        }
-
-        zoneOrder.forEach((zoneId) => {
-            refreshZoneCount(zones[zoneId]);
-        });
-
         setOffset(offsetForIndex(currentIndex));
         updateUI(currentIndex);
-        updateZonesOverall();
-        updateBagDemo();
-
-        bagDemoItems.forEach((item) => {
-            item.addEventListener('change', updateBagDemo);
-        });
-
-        if (btnZones) {
-            btnZones.addEventListener('click', () => {
-                showZonesView();
-            });
-        }
-
-        if (zonesBackBtn) {
-            zonesBackBtn.addEventListener('click', () => {
-                showOnboardingView();
-                requestAnimationFrame(() => {
-                    goToIndex(totalSteps - 1, 1);
-                });
-            });
-        }
-
-        if (zonesNextBtn) {
-            zonesNextBtn.addEventListener('click', () => {
-                const nextZoneId = getNextIncompleteZone();
-                if (!nextZoneId) return;
-                const nextZone = zones[nextZoneId];
-                if (nextZone.itemsEl) nextZone.itemsEl.classList.remove('hidden');
-                if (nextZone.card) nextZone.card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        }
+        loadMessages();
 
         // Evento opcional para el botón
         btnContinue.addEventListener('click', () => {
